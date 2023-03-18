@@ -6,11 +6,11 @@ function createHtmlForPokemonSmallCard(currentPokemon, i) {
     let pokemonImage = currentPokemon.sprites.other.dream_world.front_default;
     let actualColor = setPokemonListCardsBgr(currentPokemon.types[0].type.name);
     return `
-        <div class="pokemonCardSmall" style="background-color: ${actualColor}">
-            <h1 class="pokeName">${pokemonName}</h1>
+        <div class="cardSmall" style="background-color: ${actualColor}">
+            <h1 class="cardName">${pokemonName}</h1>
             <div class="typ">${pokemonType}</div>
-            <div class="orderPokemon">${pokemonNumber}</div>
-            <img class="pokeImage" src="${pokemonImage}" alt="">
+            <div class="cardOrder">${pokemonNumber}</div>
+            <img class="cardImage" src="${pokemonImage}" alt="">
             <img class="pokeballImage" src="src/img/Unbenannt.png" alt="">
         </div>
     `;
