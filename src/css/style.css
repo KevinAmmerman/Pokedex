@@ -19,7 +19,6 @@ body {
 .pokemonCardSmall {
     width: 250px;
     height: 180px;
-    background-color: #DC4C3B;
     border-radius: 25px;
     position: relative;
     overflow: hidden;
@@ -58,6 +57,7 @@ body {
     right: 8px;
     bottom: 8px;
     height: 120px;
+    width: 120px;
     z-index: 1;
 }
 
