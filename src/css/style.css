@@ -82,6 +82,7 @@ main {
     position: relative;
     overflow: hidden;
     margin: 8px;
+    cursor: pointer;
 }
 
 .cardSmall:hover {
@@ -151,4 +152,112 @@ main {
     top: 16px;
     right: 16px;
     color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* === FULL-CARD === */
+
+.fullCardContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 320px;
+    height: 670px;
+    position: relative;
+    overflow: hidden;
+}
+
+.topPart {
+    background-color: #59A952;
+    height: 320px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+.typeFullCard {
+    margin-right: 8px;
+}
+
+.likeBtn {
+    height: 30px;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.likeBtn:hover {
+    transform: scale(1.1);
+}
+
+.closeBtn {
+    height: 30px;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    transform: scale(1.1);
+}
+
+.fullCardOrder {
+    color: white;
+    position: absolute;
+    top: 95px;
+    right: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+}
+
+.fullCardName {
+    color: white;
+    position: absolute;
+    top: 45px;
+    left: 20px;
+    font-size: 2rem;
+}
+
+#fullCardTypContainer {
+    color: white;
+    position: absolute;
+    top: 110px;
+    left: 20px;
+    display: flex;
+}
+
+.fullCardImage {
+    height: 200px;
+    position: absolute;
+    top: 135px;
+    left: 55px;
+    z-index: 1;
+}
+
+.fullCardPokeballImage {
+    height: 230px;
+    width: 230px;
+    position: absolute;
+    top: 165px;
+    right: -47px;
+}
+
+.bottomPart {
+    background-color: #1A1B1F;
+    height: 375px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-top: -25px;
+    position: relative;
 }
