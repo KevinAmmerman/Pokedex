@@ -1,5 +1,5 @@
 let start = 1;
-let endOf = 5;
+let endOf = 100;
 let allPokemon = [];
 let allTypes = [];
 
@@ -7,10 +7,23 @@ let allTypes = [];
 // This is the inital function what starts other functions
 
 async function init() {
-    await loadPokemon();
-    loadTypes();
+    showLoader()
+    await loadPokemon(),
+    loadTypes()
+    hideLoader();
     renderPokemon();
     renderTypes();
+}
+
+
+function showLoader() {
+    const loader = document.getElementById("loadingContainer");
+    loader.style.display = "flex";
+}
+
+function hideLoader() {
+    const loader = document.getElementById("loadingContainer");
+    loader.style.display = "none";
 }
 
 
@@ -108,3 +121,9 @@ function capitalizeFirstLetter(currentPokemon) {
     let upCase = currentPokemon;
     return upCase.charAt(0).toUpperCase() + upCase.slice(1);
 }
+
+
+// window.addEventListener("load", function() {
+//     const loader = document.getElementById("loadingContainer");
+//     loader.style.display = "none";
+//   });
