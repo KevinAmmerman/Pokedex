@@ -26,8 +26,9 @@
 
         </div>
     </main>
-    <section class="fullCardContainer">
-        <div class="card">
+    <div onclick="moreCards()" class="moreBtn" style="cursor: pointer;">More</div>
+    <section id="fullCardContainer" class="fullCardContainer">
+        <div class="card" id="card">
             <div class="topPart" style="background-color: #59A952;">
                 <img class="likeBtn" src="src/img/heart-empty.png" alt="">
                 <img class="closeBtn" src="src/img/close.png" alt="">
@@ -41,7 +42,33 @@
             <img class="fullCardImage" src="src/img/pngwing.com.png"></img>
             <img class="fullCardPokeballImage" src="src/img/Unbenannt.png" alt="">
             <div class="bottomPart">
-
+                <div class="statsNav">
+                    <div class="stats">About</div>
+                    <div class="stats">Base Stats</div>
+                    <div class="stats">Evolution</div>
+                    <div class="stats">Moves</div>
+                </div>
+                <div class="border"></div>
+                <div id="infoPokemon">
+                    <div class="about">
+                        <div class="aboutRow">
+                            <div class="specs">Height</div>
+                            <p>70cm</p>
+                        </div>
+                        <div class="aboutRow">
+                            <div class="specs">Weight</div>
+                            <p>6,9kg</p>
+                        </div>
+                        <div class="aboutRow">
+                            <div class="specs">Abilities</div>
+                            <div id="abilities">Overgrow, Chlorophyl</div>
+                        </div>
+                        <div class="aboutRow">
+                            <div class="specs">Base Experience</div>
+                            <p>64</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

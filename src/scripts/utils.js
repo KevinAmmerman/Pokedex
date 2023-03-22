@@ -28,8 +28,8 @@ function setPokemonListCardsBgr(element) {
 
 // This function takes a Pokemon object as input and returns a formatted ID string.
 
-function formatNumber(currentPokemon) {
-    let num = currentPokemon;
+function formatNumber(number) {
+    let num = number;
     if (num < 10) {
         return '#00' + num;
     } else if (num < 100) {
@@ -40,9 +40,17 @@ function formatNumber(currentPokemon) {
 }
 
 
-// This function takes a Pokemon object as input and returns the name of the Pokemon with the first letter capitalized.
+// This function takes an string as input and returns it with the first letter capitalized.
 
-function capitalizeFirstLetter(currentPokemon) {
-    let upCase = currentPokemon;
+function capitalizeFirstLetter(lu) {
+    let upCase = lu;
     return upCase.charAt(0).toUpperCase() + upCase.slice(1);
+}
+
+
+
+function moreCards() {
+    start = start + 10;
+    endOf = endOf + 10;
+    init();
 }
