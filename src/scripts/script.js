@@ -80,6 +80,7 @@ function openFullCard(i) {
 
 
 function openAbout(i) {
+    addActiveClass('about');
     renderSpecs(i);
     renderAbilities(i)
 }
@@ -113,6 +114,7 @@ function renderAbilities(i) {
 
 
 function openBaseStats(i) {
+    addActiveClass('baseStats');
     let barContainer = document.getElementById('infoPokemon');
     barContainer.innerHTML = '';
     barContainer.innerHTML = creatHtmlForBaseStats(i);

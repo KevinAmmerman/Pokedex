@@ -58,6 +58,10 @@ function sliceKomma() {
 
 
 function addActiveClass(id) {
+    const elements = document.querySelectorAll('.active');
+    elements.forEach((element) => {
+        element.classList.remove('active');
+    });
     let active = document.getElementById(id);
     active.classList.add('active');
 }
