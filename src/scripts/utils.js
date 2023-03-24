@@ -57,12 +57,29 @@ function sliceKomma() {
 }
 
 
+function addActiveClass(id) {
+    let active = document.getElementById(id);
+    active.classList.add('active');
+}
+
+
 
 function moreCards() {
     start = start + 10;
     endOf = endOf + 10;
     init();
 }
+
+
+
+function closeCard() {
+    document.getElementById('fullCardContainer').style.display = 'none';
+    let card = document.getElementById('card');
+    card.innerHTML = '';
+    card.style = '';
+}
+
+
 
 function doNotClose(event) {
     event.stopPropagation();

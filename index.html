@@ -27,9 +27,9 @@
         </div>
     </main>
     <div onclick="moreCards()" class="moreBtn" style="cursor: pointer;">More</div>
-    <section id="fullCardContainer" class="fullCardContainer" style="display: none;" onclick="closeCard()">
+    <section id="fullCardContainer" class="fullCardContainer" onclick="closeCard()" style="display: none;">
         <div class="card" id="card" onclick="doNotClose(event)">
-            <!-- <div class="topPart" style="background-color: #59A952;">
+            <div class="topPart" style="background-color: #59A952;">
                 <img class="likeBtn" src="src/img/heart-empty.png" alt="">
                 <img class="closeBtn" src="src/img/close.png" alt="">
                 <h1 class="fullCardName">Bulbasaur</h1>
@@ -50,26 +50,46 @@
                 </div>
                 <div class="border"></div>
                 <div id="infoPokemon">
-                    <div class="about">
-                        <div class="aboutRow">
-                            <div class="specs">Height</div>
-                            <p>70cm</p>
+                    <div class="progressBarContainer">
+                        <div class="statsBarRow">
+                            <div class="statName">HP</div>
+                            <div class="progress">
+                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
+                            </div>
                         </div>
-                        <div class="aboutRow">
-                            <div class="specs">Weight</div>
-                            <p>6,9kg</p>
+                        <div class="statsBarRow">
+                            <div class="statName">Attack</div>
+                            <div class="progress">
+                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
+                            </div>
                         </div>
-                        <div class="aboutRow">
-                            <div class="specs">Abilities</div>
-                            <div id="abilities"></div>
+                        <div class="statsBarRow">
+                            <div class="statName">Defense</div>
+                            <div class="progress">
+                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
+                            </div>
                         </div>
-                        <div class="aboutRow">
-                            <div class="specs">Base Experience</div>
-                            <p>64</p>
+                        <div class="statsBarRow">
+                            <div class="statName">Special-Attack</div>
+                            <div class="progress">
+                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
+                            </div>
+                        </div>
+                        <div class="statsBarRow">
+                            <div class="statName">Special-Defense</div>
+                            <div class="progress">
+                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
+                            </div>
+                        </div>
+                        <div class="statsBarRow">
+                            <div class="statName">Speed</div>
+                            <div class="progress">
+                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </section>
 

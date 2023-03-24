@@ -72,18 +72,16 @@ function openFullCard(i) {
     let card = document.getElementById('card');
     card.style = 'z-index: 3;';
     card.innerHTML = creatHtmlForFullCard(i);
+    addActiveClass('about');
     renderTypesForFullCard(i);
     renderSpecs(i);
     renderAbilities(i);
 }
 
 
-
-function closeCard() {
-    document.getElementById('fullCardContainer').style.display = 'none';
-    let card = document.getElementById('card');
-    card.innerHTML = '';
-    card.style = '';
+function openAbout(i) {
+    renderSpecs(i);
+    renderAbilities(i)
 }
 
 
@@ -114,3 +112,8 @@ function renderAbilities(i) {
 }
 
 
+function openBaseStats(i) {
+    let barContainer = document.getElementById('infoPokemon');
+    barContainer.innerHTML = '';
+    barContainer.innerHTML = creatHtmlForBaseStats(i);
+}

@@ -44,9 +44,9 @@ function creatHtmlForFullCard(i) {
         <img class="fullCardPokeballImage" src="src/img/Unbenannt.png" alt="">
         <div class="bottomPart">
             <div class="statsNav">
-                <div class="stats">About</div>
-                <div class="stats">Base Stats</div>
-                <div class="stats">Moves</div>
+                <div id="about" class="stats" onclick="openAbout(${i})">About</div>
+                <div id="baseStats" class="stats" onclick="openBaseStats(${i})">Base Stats</div>
+                <div id="moves" class="stats">Moves</div>
             </div>
             <div class="border"></div>
             <div id="infoPokemon"></div>
@@ -85,4 +85,55 @@ function creatHtmlForAbout(i) {
 function createHtmlForAbilities(ability) {
     let abilityUpCase = capitalizeFirstLetter(ability);
     return `${abilityUpCase}, `;
+}
+
+
+
+function creatHtmlForBaseStats(i) {
+    let hp = allPokemon[i].stats[0].base_stat;
+    let attack = allPokemon[i].stats[1].base_stat;
+    let defense = allPokemon[i].stats[2].base_stat;
+    let sa = allPokemon[i].stats[3].base_stat;
+    let sd = allPokemon[i].stats[4].base_stat;
+    let speed = allPokemon[i].stats[5].base_stat;
+    return /*html*/ `
+        <div class="progressBarContainer">
+            <div class="statsBarRow">
+                <div class="statName">HP</div>
+                <div class="progress">
+                    <div class="progressBar" style="width: ${hp/2}%; background-color: #278BCC;">${hp}</div>
+                </div>
+            </div>
+            <div class="statsBarRow">
+                <div class="statName">Attack</div>
+                <div class="progress">
+                    <div class="progressBar" style="width: ${attack/2}%; background-color: #E53B18;">${attack}</div>
+                </div>
+            </div>
+            <div class="statsBarRow">
+                <div class="statName">Defense</div>
+                <div class="progress">
+                    <div class="progressBar" style="width: ${defense/2}%; background-color: #59A952;">${defense}</div>
+                </div>
+            </div>
+            <div class="statsBarRow">
+                <div class="statName">Special-Attack</div>
+                <div class="progress">
+                    <div class="progressBar" style="width: ${sa/2}%; background-color: #b73016;">${sa}</div>
+                </div>
+            </div>
+            <div class="statsBarRow">
+                <div class="statName">Special-Defense</div>
+                <div class="progress">
+                    <div class="progressBar" style="width: ${sd/2}%; background-color: #387532;">${sd}</div>
+                </div>
+            </div>
+            <div class="statsBarRow">
+                <div class="statName">Speed</div>
+                <div class="progress">
+                    <div class="progressBar" style="width: ${speed/2}%; background-color: #E5C600;">${speed}</div>
+                </div>
+            </div>
+        </div>
+    `;
 }
