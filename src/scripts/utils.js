@@ -49,8 +49,21 @@ function capitalizeFirstLetter(lu) {
 
 
 
+function sliceKomma() {
+    let abilities = document.getElementById('abilities');
+    let text = abilities.textContent || abilities.innerText;
+    text = text.slice(0, text.length - 2);
+    abilities.innerHTML = text;
+}
+
+
+
 function moreCards() {
     start = start + 10;
     endOf = endOf + 10;
     init();
+}
+
+function doNotClose(event) {
+    event.stopPropagation();
 }

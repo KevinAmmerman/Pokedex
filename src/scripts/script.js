@@ -11,7 +11,7 @@ let renderPokemonIndex = 0;
 async function init() {
     showLoader()
     await loadPokemon(),
-    loadTypes()
+        loadTypes()
     hideLoader();
     renderPokemon();
     renderTypes();
@@ -34,7 +34,7 @@ async function loadPokemon() {
 // This function pushes the pokemon types into an JSON array
 
 function loadTypes() {
-    for (let i = start-1; i < allPokemon.length; i++) {
+    for (let i = start - 1; i < allPokemon.length; i++) {
         const type = allPokemon[i].types;
         allTypes.push(type);
     }
@@ -48,10 +48,9 @@ function renderTypes() {
         const type = allTypes[i];
         for (let j = 0; j < type.length; j++) {
             const element = type[j].type.name;
-            console.log('test', renderTypeIndex, element);
             document.getElementById(`typeContainer${renderTypeIndex}`).innerHTML += createHtmlForTypes(element);
         }
-        renderTypeIndex = i+1;
+        renderTypeIndex = i + 1;
     }
 }
 
@@ -62,7 +61,7 @@ function renderPokemon() {
     for (let i = renderPokemonIndex; i < allPokemon.length; i++) {
         const currentPokemon = allPokemon[i];
         document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i);
-        renderPokemonIndex = i+1;
+        renderPokemonIndex = i + 1;
     }
 }
 
@@ -74,6 +73,8 @@ function openFullCard(i) {
     card.style = 'z-index: 3;';
     card.innerHTML = creatHtmlForFullCard(i);
     renderTypesForFullCard(i);
+    renderSpecs(i);
+    renderAbilities(i);
 }
 
 
@@ -93,4 +94,23 @@ function renderTypesForFullCard(i) {
         const type = allTypes[i][index].type.name;
         document.getElementById(`fullCardTypeContainer${i}`).innerHTML += createHtmlForTypes(type, styleClass);
     }
-} 
+}
+
+
+
+function renderSpecs(i) {
+    let about = document.getElementById('infoPokemon');
+    about.innerHTML = creatHtmlForAbout(i);
+}
+
+
+
+function renderAbilities(i) {
+    for (let j = 0; j < allPokemon[i].abilities.length; j++) {
+        const ability = allPokemon[i].abilities[j].ability.name;
+        document.getElementById('abilities').innerHTML += createHtmlForAbilities(ability);
+    }
+    sliceKomma();
+}
+
+

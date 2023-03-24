@@ -49,11 +49,40 @@ function creatHtmlForFullCard(i) {
                 <div class="stats">Moves</div>
             </div>
             <div class="border"></div>
+            <div id="infoPokemon"></div>
         </div>
     `;
 }
 
 
-function creatHtmlForAbout() {
-    return
+function creatHtmlForAbout(i) {
+    let height = allPokemon[i].height * 10;
+    let weight = allPokemon[i].weight / 10;
+    let bs = allPokemon[i].base_experience;
+    return /*html*/ `
+        <div class="about">
+            <div class="aboutRow">
+                <div class="specs">Height</div>
+                <p>${height}cm</p>
+            </div>
+            <div class="aboutRow">
+                <div class="specs">Weight</div>
+                <p>${weight}kg</p>
+            </div>
+            <div class="aboutRow">
+                <div class="specs">Abilities</div>
+                <div id="abilities"></div>
+            </div>
+            <div class="aboutRow">
+                <div class="specs">Base Experience</div>
+                <p>${bs}</p>
+            </div>
+        </div>
+    `;
+}
+
+
+function createHtmlForAbilities(ability) {
+    let abilityUpCase = capitalizeFirstLetter(ability);
+    return `${abilityUpCase}, `;
 }

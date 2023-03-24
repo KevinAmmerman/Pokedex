@@ -21,15 +21,15 @@
     <header>
         <img src="src/img/pokemon-logo.png" alt="">
     </header>
-    <main style="display: none;">
+    <main>
         <div id="cardContainer">
 
         </div>
     </main>
     <div onclick="moreCards()" class="moreBtn" style="cursor: pointer;">More</div>
-    <section id="fullCardContainer" class="fullCardContainer">
-        <div class="card" id="card">
-            <div class="topPart" style="background-color: #59A952;">
+    <section id="fullCardContainer" class="fullCardContainer" style="display: none;" onclick="closeCard()">
+        <div class="card" id="card" onclick="doNotClose(event)">
+            <!-- <div class="topPart" style="background-color: #59A952;">
                 <img class="likeBtn" src="src/img/heart-empty.png" alt="">
                 <img class="closeBtn" src="src/img/close.png" alt="">
                 <h1 class="fullCardName">Bulbasaur</h1>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="aboutRow">
                             <div class="specs">Abilities</div>
-                            <div id="abilities">Overgrow, Chlorophyl</div>
+                            <div id="abilities"></div>
                         </div>
                         <div class="aboutRow">
                             <div class="specs">Base Experience</div>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
