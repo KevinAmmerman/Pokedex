@@ -119,3 +119,31 @@ function openBaseStats(i) {
     barContainer.innerHTML = '';
     barContainer.innerHTML = creatHtmlForBaseStats(i);
 }
+
+
+function openMoves(i) {
+    let infoContainer = document.getElementById('infoPokemon');
+    infoContainer.innerHTML = '';
+    addActiveClass('moves');
+    createMoveContainer();
+    renderMoves(i);
+}
+
+
+function createMoveContainer() {
+    let infoContainer = document.getElementById('infoPokemon');
+    let movesContainer = document.createElement('div');
+    movesContainer.setAttribute('id', 'movesContainer');
+    movesContainer.classList.add('scroll');
+    infoContainer.appendChild(movesContainer);
+    console.log('Check', movesContainer);
+}
+
+
+function renderMoves(i) {
+    let movesContainer = document.getElementById('movesContainer')
+    for (let j = 0; j < allPokemon[i].moves.length; j++) {
+        const move = allPokemon[i].moves[j].move.name;
+        movesContainer.innerHTML += createHtmlForMoves(move);
+    }
+}

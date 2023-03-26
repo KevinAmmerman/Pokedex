@@ -46,10 +46,12 @@ function creatHtmlForFullCard(i) {
             <div class="statsNav">
                 <div id="about" class="stats" onclick="openAbout(${i})">About</div>
                 <div id="baseStats" class="stats" onclick="openBaseStats(${i})">Base Stats</div>
-                <div id="moves" class="stats">Moves</div>
+                <div id="moves" class="stats" onclick="openMoves(${i})">Moves</div>
             </div>
             <div class="border"></div>
-            <div id="infoPokemon"></div>
+            <div id="infoPokemon">
+                <div id="movesContainer"></div>
+            </div>
         </div>
     `;
 }
@@ -135,5 +137,12 @@ function creatHtmlForBaseStats(i) {
                 </div>
             </div>
         </div>
+    `;
+}
+
+
+function createHtmlForMoves(move) {
+    return `
+        <div class="type">${move}</div>
     `;
 }
