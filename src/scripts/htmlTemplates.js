@@ -74,7 +74,7 @@ function creatHtmlForAbout(i) {
                 <div id="abilities"></div>
             </div>
             <div class="aboutRow">
-                <div class="specs">Base Experience</div>
+                <div class="specs">Base Exp.</div>
                 <p>${bs}</p>
             </div>
         </div>
@@ -117,13 +117,13 @@ function creatHtmlForBaseStats(i) {
                 </div>
             </div>
             <div class="statsBarRow">
-                <div class="statName">Special-Attack</div>
+                <div class="statName">Sp. Atk</div>
                 <div class="progress">
                     <div class="progressBar" style="width: ${sa/1.7}%; background-color: #b73016;">${sa}</div>
                 </div>
             </div>
             <div class="statsBarRow">
-                <div class="statName">Special-Defense</div>
+                <div class="statName">Sp. Def</div>
                 <div class="progress">
                     <div class="progressBar" style="width: ${sd/1.7}%; background-color: #387532;">${sd}</div>
                 </div>
