@@ -10,12 +10,19 @@ let renderPokemonIndex = 0;
 // This is the inital function what starts other functions
 
 async function init() {
+<<<<<<< HEAD
     blurBackground();
     showLoader();
     await loadPokemon();
     loadBreeding();
     loadTypes();
     blurBackground();
+=======
+    showLoader()
+    await loadPokemon();
+    loadTypes();
+    loadBreeding();
+>>>>>>> second
     hideLoader();
     renderPokemon();
     renderTypes();
@@ -50,6 +57,16 @@ function loadTypes() {
     for (let i = start - 1; i < allPokemon.length; i++) {
         const type = allPokemon[i].types;
         allTypes.push(type);
+    }
+}
+
+
+async function loadBreeding() {
+    for (let i = 1; i <= allPokemon.length; i++) {
+        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
+        let response = await fetch(url);
+        let breed = await response.json();
+        breeding.push(breed);
     }
 }
 
