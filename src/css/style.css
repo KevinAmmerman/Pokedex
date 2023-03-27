@@ -36,15 +36,15 @@ body {
 /* === GENERAL === */
 
 .blur {
-    filter: blur(3px);
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
 }
 
 .scroll {
-    width: 280px;
+    width: 278px;
     height: 235px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -88,6 +88,7 @@ header {
     height: 120px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 32px;
     box-shadow: 0px 4px 6px -2px rgba(26, 27, 31, 0.75),
         0px 10px 14px 1px rgba(26, 27, 31, 0.55),
@@ -98,6 +99,10 @@ header {
 header>img {
     height: 80px;
     padding-left: 24px;
+}
+
+.searchContainer {
+    padding-right: 24px;
 }
 
 /* === POKEMON CARD SMALL === */
@@ -313,6 +318,7 @@ main {
     width: 320px;
     top: 50px;
     font-size: .8rem;
+    color: rgb(212, 212, 212);
 }
 
 .border {
@@ -337,7 +343,7 @@ main {
 
 #infoPokemon {
     width: 100%;
-    color: white;
+    color: rgb(212, 212, 212);
     font-size: .9rem;
     position: absolute;
     top: 76px;
@@ -350,6 +356,7 @@ main {
     flex-direction: column;
     padding-top: 15px;
     padding-left: 20px;
+    
 }
 
 .aboutRow {
@@ -366,6 +373,7 @@ main {
 .aboutRow h1 {
     margin-top: 8px;
     margin-bottom: 8px;
+    font-size: 1.2rem;
 }
 
 .specs {
@@ -377,18 +385,22 @@ main {
 .progressBarContainer {
     display: flex;
     flex-direction: column;
-    padding-top: 24px;
+    padding-top: 22px;
     padding-left: 20px;
     padding-right: 20px;
 }
 
 .statsBarRow {
+    align-items: center;
     display: flex;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+    flex-direction: column;
+    text-align: center;
 }
 
 .statName {
     width: 100px;
+    margin-bottom: 2px;
 }
 
 .progress {
@@ -396,6 +408,8 @@ main {
     height: 16px;
     background-color: rgba(255, 255, 255, 0);
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .progressBar {
@@ -412,5 +426,5 @@ main {
 }
 
 .typeMoves {
-    width: 92%;
+    width: 93%;
 }

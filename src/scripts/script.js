@@ -57,13 +57,13 @@ function loadTypes() {
 // This function iterates through an JSON array to gets every single type
 
 function renderTypes() {
-    for (let i = renderTypeIndex; i < allTypes.length; i++) {
+    for (let i = 0; i < allTypes.length; i++) {
         const type = allTypes[i];
         for (let j = 0; j < type.length; j++) {
             const element = type[j].type.name;
-            document.getElementById(`typeContainer${renderTypeIndex}`).innerHTML += createHtmlForTypes(element);
+            document.getElementById(`typeContainer${i}`).innerHTML += createHtmlForTypes(element);
         }
-        renderTypeIndex = i + 1;
+        // renderTypeIndex = i + 1;
     }
 }
 
@@ -150,7 +150,6 @@ function createMoveContainer() {
     movesContainer.setAttribute('id', 'movesContainer');
     movesContainer.classList.add('scroll');
     infoContainer.appendChild(movesContainer);
-    console.log('Check', movesContainer);
 }
 
 

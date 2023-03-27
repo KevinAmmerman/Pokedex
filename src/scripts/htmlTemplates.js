@@ -10,7 +10,6 @@ function createHtmlForPokemonSmallCard(currentPokemon, i) {
             <div class="cardOrder">${pokemonNumber}</div>
             <img class="pokeballImage" src="src/img/Unbenannt.png" alt="">
             <img class="cardImage" src="${pokemonImage}" alt="">
-            
         </div>
     `;
 }

@@ -71,7 +71,15 @@ function addActiveClass(id) {
 function moreCards() {
     start = start + 25;
     endOf = endOf + 25;
+    resetTypes();
     init();
+}
+
+
+function resetTypes() {
+    for (let i = 0; i < allPokemon.length; i++) {
+        document.getElementById(`typeContainer${i}`).innerHTML = '';
+    }
 }
 
 
@@ -94,4 +102,19 @@ function doNotClose(event) {
 function blurBackground() {
     let main = document.getElementById('mainSection');
     main.classList.toggle('blur');
+}
+
+
+function searchPokemon() {
+    let search = document.getElementById('inputSearch').value;
+    search = search.toLowerCase();
+    let cardContainer = document.getElementById('cardContainer');
+    cardContainer.innerHTML = '';
+    for (let i = 0; i < allPokemon.length; i++) {
+        const currentPokemon = allPokemon[i].species.name;
+        if(currentPokemon.includes(search)) {
+            console.log(i, allPokemon[i]);
+            cardContainer.innerHTML += createHtmlForPokemonSmallCard(allPokemon[i], i)
+        }
+    }
 }
