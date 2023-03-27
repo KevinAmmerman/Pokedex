@@ -2,6 +2,7 @@ let start = 1;
 let endOf = 10;
 let allPokemon = [];
 let allTypes = [];
+let breeding = [];
 let renderTypeIndex = 0;
 let renderPokemonIndex = 0;
 
@@ -10,8 +11,9 @@ let renderPokemonIndex = 0;
 
 async function init() {
     showLoader()
-    await loadPokemon(),
-        loadTypes()
+    await loadPokemon();
+    loadTypes();
+    loadBreeding();
     hideLoader();
     renderPokemon();
     renderTypes();
@@ -37,6 +39,16 @@ function loadTypes() {
     for (let i = start - 1; i < allPokemon.length; i++) {
         const type = allPokemon[i].types;
         allTypes.push(type);
+    }
+}
+
+
+async function loadBreeding() {
+    for (let i = 1; i <= allPokemon.length; i++) {
+        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
+        let response = await fetch(url);
+        let breed = await response.json();
+        breeding.push(breed);
     }
 }
 
@@ -76,6 +88,7 @@ function openFullCard(i) {
     renderTypesForFullCard(i);
     renderSpecs(i);
     renderAbilities(i);
+    blurBackground();
 }
 
 
@@ -136,7 +149,6 @@ function createMoveContainer() {
     movesContainer.setAttribute('id', 'movesContainer');
     movesContainer.classList.add('scroll');
     infoContainer.appendChild(movesContainer);
-    console.log('Check', movesContainer);
 }
 
 
