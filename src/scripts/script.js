@@ -10,19 +10,12 @@ let renderPokemonIndex = 0;
 // This is the inital function what starts other functions
 
 async function init() {
-<<<<<<< HEAD
     blurBackground();
     showLoader();
     await loadPokemon();
     loadBreeding();
     loadTypes();
     blurBackground();
-=======
-    showLoader()
-    await loadPokemon();
-    loadTypes();
-    loadBreeding();
->>>>>>> second
     hideLoader();
     renderPokemon();
     renderTypes();
