@@ -61,6 +61,8 @@ function creatHtmlForAbout(i) {
     let height = allPokemon[i].height * 10;
     let weight = allPokemon[i].weight / 10;
     let bs = allPokemon[i].base_experience;
+    let eg = capitalizeFirstLetter(breeding[i].egg_groups[0].name);
+    let ec = checkIfthere(i);
     return /*html*/ `
         <div class="about">
             <div class="aboutRow">
@@ -79,8 +81,27 @@ function creatHtmlForAbout(i) {
                 <div class="specs">Base Exp.</div>
                 <p>${bs}</p>
             </div>
+            <div class="aboutRow">
+                <h1>Breeding</h1>
+            </div>
+            <div class="aboutRow">
+                <div class="specs">Egg Groups</div>
+                <p>${eg}</p>
+            </div>
+            <div class="aboutRow">
+                <div class="specs">Egg Cycle</div>
+                <p>${ec}</p>
+            </div>
         </div>
     `;
+}
+
+function checkIfthere(i) {
+    if(breeding[i].egg_groups[1]) {
+        return capitalizeFirstLetter(breeding[i].egg_groups[1].name);
+    } else {
+        return '-';
+    }
 }
 
 
@@ -103,37 +124,37 @@ function creatHtmlForBaseStats(i) {
             <div class="statsBarRow">
                 <div class="statName">HP</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${hp/1.7}%; background-color: #278BCC;">${hp}</div>
+                    <div class="progressBar" style="width: ${hp / 1.7}%; background-color: #278BCC;">${hp}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Attack</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${attack/1.7}%; background-color: #E53B18;">${attack}</div>
+                    <div class="progressBar" style="width: ${attack / 1.7}%; background-color: #E53B18;">${attack}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Defense</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${defense/1.7}%; background-color: #59A952;">${defense}</div>
+                    <div class="progressBar" style="width: ${defense / 1.7}%; background-color: #59A952;">${defense}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Sp. Atk</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${sa/1.7}%; background-color: #b73016;">${sa}</div>
+                    <div class="progressBar" style="width: ${sa / 1.7}%; background-color: #b73016;">${sa}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Sp. Def</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${sd/1.7}%; background-color: #387532;">${sd}</div>
+                    <div class="progressBar" style="width: ${sd / 1.7}%; background-color: #387532;">${sd}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Speed</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${speed/1.7}%; background-color: #E5C600;">${speed}</div>
+                    <div class="progressBar" style="width: ${speed / 1.7}%; background-color: #E5C600;">${speed}</div>
                 </div>
             </div>
         </div>
@@ -143,6 +164,6 @@ function creatHtmlForBaseStats(i) {
 
 function createHtmlForMoves(move) {
     return `
-        <div class="type">${move}</div>
+        <div class="type typeMoves">${move}</div>
     `;
 }

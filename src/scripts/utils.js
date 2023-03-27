@@ -81,10 +81,17 @@ function closeCard() {
     let card = document.getElementById('card');
     card.innerHTML = '';
     card.style = '';
+    blurBackground();
 }
 
 
 
 function doNotClose(event) {
     event.stopPropagation();
+}
+
+
+function blurBackground() {
+    let main = document.getElementById('mainSection');
+    main.classList.toggle('blur');
 }
