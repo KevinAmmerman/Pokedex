@@ -67,13 +67,13 @@ async function loadBreeding() {
 // This function iterates through an JSON array to gets every single type
 
 function renderTypes() {
-    for (let i = 0; i < allTypes.length; i++) {
+    for (let i = renderTypeIndex; i < allTypes.length; i++) {
         const type = allTypes[i];
         for (let j = 0; j < type.length; j++) {
             const element = type[j].type.name;
-            document.getElementById(`typeContainer${i}`).innerHTML += createHtmlForTypes(element);
+            document.getElementById(`typeContainer${renderTypeIndex}`).innerHTML += createHtmlForTypes(element);
         }
-        // renderTypeIndex = i + 1;
+        renderTypeIndex = i + 1;
     }
 }
 
@@ -116,6 +116,14 @@ function renderTypesForFullCard(i) {
     for (let index = 0; index < allTypes[i].length; index++) {
         const type = allTypes[i][index].type.name;
         document.getElementById(`fullCardTypeContainer${i}`).innerHTML += createHtmlForTypes(type, styleClass);
+    }
+}
+
+
+function renderTypesSearch(t) {
+    for (let i = 0; i < allPokemon[t].types.length; i++) {
+        const type = allPokemon[t].types[i].type.name;
+        document.getElementById(`typeContainer${t}`).innerHTML += createHtmlForTypes(type);
     }
 }
 

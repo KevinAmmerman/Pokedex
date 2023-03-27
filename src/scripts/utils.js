@@ -71,16 +71,16 @@ function addActiveClass(id) {
 function moreCards() {
     start = start + 25;
     endOf = endOf + 25;
-    resetTypes();
+    // resetTypes();
     init();
 }
 
 
-function resetTypes() {
-    for (let i = 0; i < allPokemon.length; i++) {
-        document.getElementById(`typeContainer${i}`).innerHTML = '';
-    }
-}
+// function resetTypes() {
+//     for (let i = 0; i < allPokemon.length; i++) {
+//         document.getElementById(`typeContainer${i}`).innerHTML = '';
+//     }
+// }
 
 
 
@@ -107,14 +107,16 @@ function blurBackground() {
 
 function searchPokemon() {
     let search = document.getElementById('inputSearch').value;
-    search = search.toLowerCase();
     let cardContainer = document.getElementById('cardContainer');
+    search = search.toLowerCase();
     cardContainer.innerHTML = '';
     for (let i = 0; i < allPokemon.length; i++) {
         const currentPokemon = allPokemon[i].species.name;
-        if(currentPokemon.includes(search)) {
+        const currentPokemonId = allPokemon[i].id
+        if(currentPokemon.includes(search) || currentPokemonId.toString().includes(search)) {
             console.log(i, allPokemon[i]);
             cardContainer.innerHTML += createHtmlForPokemonSmallCard(allPokemon[i], i)
+            renderTypesSearch(i);
         }
     }
 }
