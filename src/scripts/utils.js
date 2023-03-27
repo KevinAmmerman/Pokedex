@@ -69,8 +69,8 @@ function addActiveClass(id) {
 
 
 function moreCards() {
-    start = start + 10;
-    endOf = endOf + 10;
+    start = start + 25;
+    endOf = endOf + 25;
     init();
 }
 

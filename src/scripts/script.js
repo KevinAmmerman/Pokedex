@@ -1,7 +1,8 @@
 let start = 1;
-let endOf = 10;
+let endOf = 25;
 let allPokemon = [];
 let allTypes = [];
+let breeding = [];
 let renderTypeIndex = 0;
 let renderPokemonIndex = 0;
 
@@ -9,14 +10,16 @@ let renderPokemonIndex = 0;
 // This is the inital function what starts other functions
 
 async function init() {
-    showLoader()
-    await loadPokemon(),
-        loadTypes()
+    blurBackground();
+    showLoader();
+    await loadPokemon();
+    loadBreeding();
+    loadTypes();
+    blurBackground();
     hideLoader();
     renderPokemon();
     renderTypes();
 }
-
 
 
 // This function loads a certain amount of pokemon and pushes it into an JSON Array
@@ -27,6 +30,16 @@ async function loadPokemon() {
         let response = await fetch(url);
         let currentPokemon = await response.json();
         allPokemon.push(currentPokemon);
+    }
+}
+
+
+async function loadBreeding() {
+    for (let i = 1; i <= allPokemon.length; i++) {
+        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
+        let response = await fetch(url);
+        let breed = await response.json();
+        breeding.push(breed);
     }
 }
 
@@ -76,6 +89,7 @@ function openFullCard(i) {
     renderTypesForFullCard(i);
     renderSpecs(i);
     renderAbilities(i);
+    blurBackground();
 }
 
 
