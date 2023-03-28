@@ -1,10 +1,10 @@
-function createHtmlForPokemonSmallCard(currentPokemon, i) {
+function createHtmlForPokemonSmallCard(currentPokemon, i, pj) {
     let pokemonName = capitalizeFirstLetter(currentPokemon.name);
     let pokemonNumber = formatNumber(currentPokemon.id);
     let pokemonImage = checkImage(currentPokemon, i);
     let actualColor = setPokemonListCardsBgr(currentPokemon.types[0].type.name);
     return `
-        <div onclick="openFullCard(${i})" class="cardSmall" style="background-color: ${actualColor}">
+        <div onclick="openFullCard(${pj},${i})" class="cardSmall" style="background-color: ${actualColor}">
             <h1 class="cardName">${pokemonName}</h1>
             <div id="typeContainer${i}" class="typeContainer"></div>
             <div class="cardOrder">${pokemonNumber}</div>
@@ -32,11 +32,11 @@ function createHtmlForTypes(type, cl) {
 }
 
 
-function creatHtmlForFullCard(i) {
-    let pokemonName = capitalizeFirstLetter(allPokemon[i].name);
-    let pokemonNumber = formatNumber(allPokemon[i].id);
-    let pokemonImage = checkImage(allPokemon[i]);
-    let actualColor = setPokemonListCardsBgr(allPokemon[i].types[0].type.name);
+function creatHtmlForFullCard(pj, i) {
+    let pokemonName = capitalizeFirstLetter(pj[i].name);
+    let pokemonNumber = formatNumber(pj[i].id);
+    let pokemonImage = checkImage(pj[i]);
+    let actualColor = setPokemonListCardsBgr(pj[i].types[0].type.name);
     return /*html*/ `
         <div class="topPart" style="background-color: ${actualColor};">
             <img class="likeBtn" src="src/img/heart-empty.png" alt="">

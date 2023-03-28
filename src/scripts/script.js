@@ -24,8 +24,7 @@ async function init() {
     renderTypes();
 }
 
-
-// This function loads a certain amount of pokemon and pushes it into an JSON Array
+// === GET-API-FUNCTIONS ===
 
 async function loadPokemon() {
     for (let i = start; i <= endOf; i++) {
@@ -68,6 +67,7 @@ async function loadBreeding() {
     }
 }
 
+// === SMALL-CARD-FUNCTIONS ===
 
 // This function pushes the pokemon types into an JSON array
 
@@ -79,6 +79,14 @@ function loadTypes() {
 }
 
 
+function renderPokemon() {
+    let mainPokemonJson = 'allPokemon';
+    for (let i = renderPokemonIndex; i < allPokemon.length; i++) {
+        const currentPokemon = allPokemon[i];
+        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i, mainPokemonJson);
+        renderPokemonIndex = i + 1;
+    }
+}
 
 // This function iterates through an JSON array to gets every single type
 
@@ -93,53 +101,18 @@ function renderTypes() {
     }
 }
 
+// === SINGLE-CARD-FUNCTIONS ===
 
-// This function iterates through all pokemons to get one and renders it
-
-function renderPokemon() {
-    for (let i = renderPokemonIndex; i < allPokemon.length; i++) {
-        const currentPokemon = allPokemon[i];
-        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i);
-        renderPokemonIndex = i + 1;
-    }
-}
-
-
-function renderSearchedPokemon() {
-    for (let i = 0; i < searchedPokemon.length; i++) {
-        const currentPokemon = searchedPokemon[i];
-        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i);
-    }
-}
-
-
-
-function openFullCard(i) {
+function openFullCard(pj, i) {
     document.getElementById('fullCardContainer').style.display = 'flex';
     let card = document.getElementById('card');
     card.style = 'z-index: 3;';
-    card.innerHTML = creatHtmlForFullCard(i);
+    card.innerHTML = creatHtmlForFullCard(pj, i);
     addActiveClass('about');
     renderTypesForFullCard(i);
     renderSpecs(i);
     renderAbilities(i);
     blurBackground();
-}
-
-async function searchPokemon() {
-    showLoader();
-    document.getElementById('cardContainer').innerHTML = '';
-    await searchForPokemonInPokemonNames();
-    renderSearchedPokemon();
-    renderTypesSearch();
-    hideLoader();
-}
-
-
-function openAbout(i) {
-    addActiveClass('about');
-    renderSpecs(i);
-    renderAbilities(i)
 }
 
 
@@ -153,15 +126,11 @@ function renderTypesForFullCard(i) {
 }
 
 
-function renderTypesSearch() {
-    for (let i = 0; i < searchedPokemon.length; i++) {
-        const currentPokemon = searchedPokemon[i];
-        for (let j = 0; j < currentPokemon.types.length; j++) {
-            const type = currentPokemon.types[j].type.name;
-            document.getElementById(`typeContainer${i}`).innerHTML += createHtmlForTypes(type);
-        }
-        
-    }
+
+function openAbout(i) {
+    addActiveClass('about');
+    renderSpecs(i);
+    renderAbilities(i)
 }
 
 
@@ -170,7 +139,6 @@ function renderSpecs(i) {
     let about = document.getElementById('infoPokemon');
     about.innerHTML = creatHtmlForAbout(i);
 }
-
 
 
 function renderAbilities(i) {
@@ -213,5 +181,57 @@ function renderMoves(i) {
     for (let j = 0; j < allPokemon[i].moves.length; j++) {
         const move = allPokemon[i].moves[j].move.name;
         movesContainer.innerHTML += createHtmlForMoves(move);
+    }
+}
+
+
+// === SEARCH-FUNCTIONS ===
+
+async function searchPokemon() {
+    showLoader();
+    document.getElementById('cardContainer').innerHTML = '';
+    searchedPokemon = [];
+    await searchForPokemonInPokemonNames();
+    renderSearchedPokemon();
+    renderTypesSearch();
+    hideLoader();
+}
+
+
+
+async function searchForPokemonInPokemonNames() {
+    let searchPokemon = [];
+    let search = document.getElementById('inputSearch').value;
+    search = search.toLowerCase();
+    for (let i = 0; i < pokemonNames.length; i++) {
+        const currentPokemon = pokemonNames[i];
+        if(currentPokemon.includes(search)) {
+            searchPokemon.push(currentPokemon);
+        }
+    }
+    for (let i = 0; i < searchPokemon.length; i++) {
+        const onePokemon = searchPokemon[i];
+        await loadSearchedPokemon(onePokemon);
+    }
+}
+
+
+
+function renderSearchedPokemon() {
+    let sp = 'searchedPokemon';
+    for (let i = 0; i < searchedPokemon.length; i++) {
+        const currentPokemon = searchedPokemon[i];
+        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i, sp);
+    }
+}
+
+
+function renderTypesSearch() {
+    for (let i = 0; i < searchedPokemon.length; i++) {
+        const currentPokemon = searchedPokemon[i];
+        for (let j = 0; j < currentPokemon.types.length; j++) {
+            const type = currentPokemon.types[j].type.name;
+            document.getElementById(`typeContainer${i}`).innerHTML += createHtmlForTypes(type);
+        }
     }
 }
