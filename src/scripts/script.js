@@ -1,6 +1,8 @@
 let start = 1;
 let endOf = 25;
 let allPokemon = [];
+let searchedPokemon = [];
+let pokemonNames = [];
 let allTypes = [];
 let breeding = [];
 let renderTypeIndex = 0;
@@ -13,6 +15,7 @@ async function init() {
     blurBackground();
     showLoader();
     await loadPokemon();
+    await loadPokemonNames();
     loadBreeding();
     loadTypes();
     blurBackground();
@@ -34,6 +37,28 @@ async function loadPokemon() {
 }
 
 
+
+async function loadSearchedPokemon(i) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    let response = await fetch(url);
+    let currentPokemon = await response.json();
+    searchedPokemon.push(currentPokemon);
+}
+
+
+
+async function loadPokemonNames() {
+    let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1280'
+    let response = await fetch(url);
+    let pokemons = await response.json();
+    for (let i = 0; i < pokemons.results.length; i++) {
+        const name = pokemons.results[i].name;
+        pokemonNames.push(name);
+    }
+}
+
+
+
 async function loadBreeding() {
     for (let i = 1; i <= allPokemon.length; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
@@ -53,15 +78,6 @@ function loadTypes() {
     }
 }
 
-
-async function loadBreeding() {
-    for (let i = 1; i <= allPokemon.length; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
-        let response = await fetch(url);
-        let breed = await response.json();
-        breeding.push(breed);
-    }
-}
 
 
 // This function iterates through an JSON array to gets every single type
@@ -89,6 +105,14 @@ function renderPokemon() {
 }
 
 
+function renderSearchedPokemon() {
+    for (let i = 0; i < searchedPokemon.length; i++) {
+        const currentPokemon = searchedPokemon[i];
+        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i);
+    }
+}
+
+
 
 function openFullCard(i) {
     document.getElementById('fullCardContainer').style.display = 'flex';
@@ -100,6 +124,15 @@ function openFullCard(i) {
     renderSpecs(i);
     renderAbilities(i);
     blurBackground();
+}
+
+async function searchPokemon() {
+    showLoader();
+    document.getElementById('cardContainer').innerHTML = '';
+    await searchForPokemonInPokemonNames();
+    renderSearchedPokemon();
+    renderTypesSearch();
+    hideLoader();
 }
 
 
@@ -120,10 +153,14 @@ function renderTypesForFullCard(i) {
 }
 
 
-function renderTypesSearch(t) {
-    for (let i = 0; i < allPokemon[t].types.length; i++) {
-        const type = allPokemon[t].types[i].type.name;
-        document.getElementById(`typeContainer${t}`).innerHTML += createHtmlForTypes(type);
+function renderTypesSearch() {
+    for (let i = 0; i < searchedPokemon.length; i++) {
+        const currentPokemon = searchedPokemon[i];
+        for (let j = 0; j < currentPokemon.types.length; j++) {
+            const type = currentPokemon.types[j].type.name;
+            document.getElementById(`typeContainer${i}`).innerHTML += createHtmlForTypes(type);
+        }
+        
     }
 }
 

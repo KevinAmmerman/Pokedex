@@ -105,18 +105,34 @@ function blurBackground() {
 }
 
 
-function searchPokemon() {
+// function searchPokemon() {
+//     let search = document.getElementById('inputSearch').value;
+//     let cardContainer = document.getElementById('cardContainer');
+//     search = search.toLowerCase();
+//     cardContainer.innerHTML = '';
+//     for (let i = 0; i < allPokemon.length; i++) {
+//         const currentPokemon = allPokemon[i].species.name;
+//         const currentPokemonId = allPokemon[i].id
+//         if(currentPokemon.includes(search) || currentPokemonId.toString().includes(search)) {
+//             // console.log(i, allPokemon[i]);
+//             cardContainer.innerHTML += createHtmlForPokemonSmallCard(allPokemon[i], i)
+//             renderTypesSearch(i);
+//         }
+//     }
+// }
+
+async function searchForPokemonInPokemonNames() {
+    let searchPokemon = [];
     let search = document.getElementById('inputSearch').value;
-    let cardContainer = document.getElementById('cardContainer');
     search = search.toLowerCase();
-    cardContainer.innerHTML = '';
-    for (let i = 0; i < allPokemon.length; i++) {
-        const currentPokemon = allPokemon[i].species.name;
-        const currentPokemonId = allPokemon[i].id
-        if(currentPokemon.includes(search) || currentPokemonId.toString().includes(search)) {
-            console.log(i, allPokemon[i]);
-            cardContainer.innerHTML += createHtmlForPokemonSmallCard(allPokemon[i], i)
-            renderTypesSearch(i);
+    for (let i = 0; i < pokemonNames.length; i++) {
+        const currentPokemon = pokemonNames[i];
+        if(currentPokemon.includes(search)) {
+            searchPokemon.push(currentPokemon);
         }
+    }
+    for (let i = 0; i < searchPokemon.length; i++) {
+        const onePokemon = searchPokemon[i];
+        await loadSearchedPokemon(onePokemon);
     }
 }

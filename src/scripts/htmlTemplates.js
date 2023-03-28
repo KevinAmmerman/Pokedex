@@ -1,7 +1,7 @@
 function createHtmlForPokemonSmallCard(currentPokemon, i) {
     let pokemonName = capitalizeFirstLetter(currentPokemon.name);
     let pokemonNumber = formatNumber(currentPokemon.id);
-    let pokemonImage = currentPokemon.sprites.other.dream_world.front_default;
+    let pokemonImage = checkImage(currentPokemon, i);
     let actualColor = setPokemonListCardsBgr(currentPokemon.types[0].type.name);
     return `
         <div onclick="openFullCard(${i})" class="cardSmall" style="background-color: ${actualColor}">
@@ -12,6 +12,14 @@ function createHtmlForPokemonSmallCard(currentPokemon, i) {
             <img class="cardImage" src="${pokemonImage}" alt="">
         </div>
     `;
+}
+
+function checkImage(currentPokemon, i) {
+    if(currentPokemon.sprites.other.dream_world.front_default == null) {
+        return currentPokemon.sprites.other['official-artwork'].front_default;
+    } else {
+        return currentPokemon.sprites.other.dream_world.front_default;
+    }
 }
 
 
@@ -27,7 +35,7 @@ function createHtmlForTypes(type, cl) {
 function creatHtmlForFullCard(i) {
     let pokemonName = capitalizeFirstLetter(allPokemon[i].name);
     let pokemonNumber = formatNumber(allPokemon[i].id);
-    let pokemonImage = allPokemon[i].sprites.other.dream_world.front_default;
+    let pokemonImage = checkImage(allPokemon[i]);
     let actualColor = setPokemonListCardsBgr(allPokemon[i].types[0].type.name);
     return /*html*/ `
         <div class="topPart" style="background-color: ${actualColor};">
