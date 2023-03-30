@@ -1,7 +1,8 @@
 function createHtmlForPokemonSmallCard(currentPokemon, i, pj) {
     let pokemonName = capitalizeFirstLetter(currentPokemon.name);
     let pokemonNumber = formatNumber(currentPokemon.id);
-    let pokemonImage = checkImage(currentPokemon, i);
+    let pokemonImage = currentPokemon.sprites.other['official-artwork'].front_default;
+    // let imageSize = checkImageForSizeOfSmallCard(currentPokemon);
     let actualColor = setPokemonListCardsBgr(currentPokemon.types[0].type.name);
     return `
         <div onclick="openFullCard(${pj},${i})" class="cardSmall" style="background-color: ${actualColor}">
@@ -12,14 +13,6 @@ function createHtmlForPokemonSmallCard(currentPokemon, i, pj) {
             <img class="cardImage" src="${pokemonImage}" alt="">
         </div>
     `;
-}
-
-function checkImage(currentPokemon, i) {
-    if(currentPokemon.sprites.other.dream_world.front_default == null) {
-        return currentPokemon.sprites.other['official-artwork'].front_default;
-    } else {
-        return currentPokemon.sprites.other.dream_world.front_default;
-    }
 }
 
 
@@ -35,7 +28,8 @@ function createHtmlForTypes(type, cl) {
 function creatHtmlForFullCard(pj, i) {
     let pokemonName = capitalizeFirstLetter(pj[i].name);
     let pokemonNumber = formatNumber(pj[i].id);
-    let pokemonImage = checkImage(pj[i]);
+    let pokemonImage = pj[i].sprites.other['official-artwork'].front_default;
+    // let imageSize = checkImageForSizeOfFullCard(pj[i]);
     let actualColor = setPokemonListCardsBgr(pj[i].types[0].type.name);
     return /*html*/ `
         <div class="topPart" style="background-color: ${actualColor};">
@@ -50,6 +44,10 @@ function creatHtmlForFullCard(pj, i) {
         <img class="fullCardImage" src="${pokemonImage}"></img>
         <img class="fullCardPokeballImage" src="src/img/Unbenannt.png" alt="">
         <div class="bottomPart">
+            <div class="arrowContainer">
+                <img onclick="previousCard(${pj},${i})" class="arrowStyle" src="src/img/arrow-83-64.png" alt="">
+                <img onclick="nextCard(${pj},${i})" class="arrowStyle" src="src/img/arrow-54-64.png" alt="">
+            </div>
             <div class="statsNav">
                 <div id="about" class="stats" onclick="openAbout(${i})">About</div>
                 <div id="baseStats" class="stats" onclick="openBaseStats(${i})">Base Stats</div>

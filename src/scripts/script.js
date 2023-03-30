@@ -185,6 +185,16 @@ function renderMoves(i) {
 }
 
 
+function nextCard(i) {
+    openFullCard(pj, i+1)
+}
+
+
+function previousCard() {
+    
+}
+
+
 // === SEARCH-FUNCTIONS ===
 
 async function searchPokemon() {
