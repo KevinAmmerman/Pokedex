@@ -1,7 +1,6 @@
 let start = 1;
 let endOf = 25;
 let allPokemon = [];
-let searchedPokemon = [];
 let pokemonNames = [];
 let allTypes = [];
 let breeding = [];
@@ -41,7 +40,7 @@ async function loadSearchedPokemon(i) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
     let currentPokemon = await response.json();
-    searchedPokemon.push(currentPokemon);
+    allPokemon.push(currentPokemon);
 }
 
 
@@ -80,10 +79,9 @@ function loadTypes() {
 
 
 function renderPokemon() {
-    let mainPokemonJson = 'allPokemon';
     for (let i = renderPokemonIndex; i < allPokemon.length; i++) {
         const currentPokemon = allPokemon[i];
-        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i, mainPokemonJson);
+        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i);
         renderPokemonIndex = i + 1;
     }
 }
@@ -103,16 +101,15 @@ function renderTypes() {
 
 // === SINGLE-CARD-FUNCTIONS ===
 
-function openFullCard(pj, i) {
+function openFullCard(i) {
     document.getElementById('fullCardContainer').style.display = 'flex';
     let card = document.getElementById('card');
     card.style = 'z-index: 3;';
-    card.innerHTML = creatHtmlForFullCard(pj, i);
+    card.innerHTML = creatHtmlForFullCard(i);
     addActiveClass('about');
     renderTypesForFullCard(i);
     renderSpecs(i);
     renderAbilities(i);
-    blurBackground();
 }
 
 
@@ -186,21 +183,24 @@ function renderMoves(i) {
 
 
 function nextCard(i) {
-    openFullCard(pj, i+1)
+    openFullCard(i+1)
 }
 
 
-function previousCard() {
-    
+function previousCard(i) {
+    openFullCard(i-1)
 }
 
 
 // === SEARCH-FUNCTIONS ===
 
 async function searchPokemon() {
+    // if(!checkIfInput()) {
+    //     return;
+    // } 
     showLoader();
     document.getElementById('cardContainer').innerHTML = '';
-    searchedPokemon = [];
+    allPokemon = [];
     await searchForPokemonInPokemonNames();
     renderSearchedPokemon();
     renderTypesSearch();
@@ -210,35 +210,42 @@ async function searchPokemon() {
 
 
 async function searchForPokemonInPokemonNames() {
-    let searchPokemon = [];
-    let search = document.getElementById('inputSearch').value;
-    search = search.toLowerCase();
+    let allPokemon = [];
+    let search = document.getElementById('inputSearch');
+    searchValue = search.value.toLowerCase();
     for (let i = 0; i < pokemonNames.length; i++) {
         const currentPokemon = pokemonNames[i];
-        if(currentPokemon.includes(search)) {
-            searchPokemon.push(currentPokemon);
+        if(currentPokemon.includes(searchValue)) {
+            allPokemon.push(currentPokemon);
         }
     }
-    for (let i = 0; i < searchPokemon.length; i++) {
-        const onePokemon = searchPokemon[i];
+    for (let i = 0; i < allPokemon.length; i++) {
+        const onePokemon = allPokemon[i];
         await loadSearchedPokemon(onePokemon);
     }
+    search.value = '';
 }
 
 
+// function checkIfInput() {
+//     let search = document.getElementById('inputSearch').value;
+//     if (!search) {
+//         return;
+//     } 
+// }
+
 
 function renderSearchedPokemon() {
-    let sp = 'searchedPokemon';
-    for (let i = 0; i < searchedPokemon.length; i++) {
-        const currentPokemon = searchedPokemon[i];
-        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i, sp);
+    for (let i = 0; i < allPokemon.length; i++) {
+        const currentPokemon = allPokemon[i];
+        document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i);
     }
 }
 
 
 function renderTypesSearch() {
-    for (let i = 0; i < searchedPokemon.length; i++) {
-        const currentPokemon = searchedPokemon[i];
+    for (let i = 0; i < allPokemon.length; i++) {
+        const currentPokemon = allPokemon[i];
         for (let j = 0; j < currentPokemon.types.length; j++) {
             const type = currentPokemon.types[j].type.name;
             document.getElementById(`typeContainer${i}`).innerHTML += createHtmlForTypes(type);

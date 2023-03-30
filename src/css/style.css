@@ -312,17 +312,27 @@ main {
 
 .arrowContainer {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 16px;
 }
 
-.arrowStyle {
-    height: 40px;
+.rightArrowStyle {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+}
+
+.leftArrowStyle {
+    position: absolute;
+    left: 12px;
+    top: 8px;
+}
+
+.leftArrowStyle, .rightArrowStyle {
+    height: 35px;
     cursor: pointer;
+    opacity: .7;
 }
 
-.arrowStyle:hover {
+.leftArrowStyle:hover, .rightArrowStyle:hover {
     transform: scale(1.1);
 }
 
@@ -379,6 +389,7 @@ main {
     display: flex;
     align-items: center;
     min-height: 38px;
+    width: 285px;
 }
 
 .aboutRow p {

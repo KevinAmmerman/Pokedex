@@ -82,7 +82,7 @@ function closeCard() {
     let card = document.getElementById('card');
     card.innerHTML = '';
     card.style = '';
-    blurBackground();
+    // blurBackground();
 }
 
 
@@ -95,4 +95,47 @@ function doNotClose(event) {
 function blurBackground() {
     let main = document.getElementById('mainSection');
     main.classList.toggle('blur');
+}
+
+
+function checkIfthere(i) {
+    if (breeding[i].egg_groups[1]) {
+        return capitalizeFirstLetter(breeding[i].egg_groups[1].name);
+    } else {
+        return '-';
+    }
+}
+
+
+function previousCardCheck(i) {
+    if (i === 0) {
+        return 'display: none';
+    } else {
+        return ''
+    }
+}
+
+function nextCardCheck(i) {
+    if (i == allPokemon.length - 1) {
+        return 'display: none';
+    } else {
+        return ''
+    }
+}
+
+function resetSearch() {
+    resetAllJsonAndVariables();
+    document.getElementById('cardContainer').innerHTML = '';
+    init();
+}
+
+function resetAllJsonAndVariables() {
+    start = 1;
+    endOf = 25;
+    allPokemon = [];
+    pokemonNames = [];
+    allTypes = [];
+    breeding = [];
+    renderTypeIndex = 0;
+    renderPokemonIndex = 0;
 }

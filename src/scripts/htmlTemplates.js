@@ -1,11 +1,10 @@
-function createHtmlForPokemonSmallCard(currentPokemon, i, pj) {
+function createHtmlForPokemonSmallCard(currentPokemon, i) {
     let pokemonName = capitalizeFirstLetter(currentPokemon.name);
     let pokemonNumber = formatNumber(currentPokemon.id);
     let pokemonImage = currentPokemon.sprites.other['official-artwork'].front_default;
-    // let imageSize = checkImageForSizeOfSmallCard(currentPokemon);
     let actualColor = setPokemonListCardsBgr(currentPokemon.types[0].type.name);
     return `
-        <div onclick="openFullCard(${pj},${i})" class="cardSmall" style="background-color: ${actualColor}">
+        <div onclick="openFullCard(${i})" class="cardSmall" style="background-color: ${actualColor}">
             <h1 class="cardName">${pokemonName}</h1>
             <div id="typeContainer${i}" class="typeContainer"></div>
             <div class="cardOrder">${pokemonNumber}</div>
@@ -25,12 +24,13 @@ function createHtmlForTypes(type, cl) {
 }
 
 
-function creatHtmlForFullCard(pj, i) {
-    let pokemonName = capitalizeFirstLetter(pj[i].name);
-    let pokemonNumber = formatNumber(pj[i].id);
-    let pokemonImage = pj[i].sprites.other['official-artwork'].front_default;
-    // let imageSize = checkImageForSizeOfFullCard(pj[i]);
-    let actualColor = setPokemonListCardsBgr(pj[i].types[0].type.name);
+function creatHtmlForFullCard(i) {
+    let pokemonName = capitalizeFirstLetter(allPokemon[i].name);
+    let pokemonNumber = formatNumber(allPokemon[i].id);
+    let pokemonImage = allPokemon[i].sprites.other['official-artwork'].front_default;
+    let previousCardArrow = previousCardCheck(i);
+    let nextCardArrow = nextCardCheck(i);
+    let actualColor = setPokemonListCardsBgr(allPokemon[i].types[0].type.name);
     return /*html*/ `
         <div class="topPart" style="background-color: ${actualColor};">
             <img class="likeBtn" src="src/img/heart-empty.png" alt="">
@@ -45,8 +45,8 @@ function creatHtmlForFullCard(pj, i) {
         <img class="fullCardPokeballImage" src="src/img/Unbenannt.png" alt="">
         <div class="bottomPart">
             <div class="arrowContainer">
-                <img onclick="previousCard(${pj},${i})" class="arrowStyle" src="src/img/arrow-83-64.png" alt="">
-                <img onclick="nextCard(${pj},${i})" class="arrowStyle" src="src/img/arrow-54-64.png" alt="">
+                <img style="${previousCardArrow}" onclick="previousCard(${i})" class="leftArrowStyle" src="src/img/left.png" alt="">
+                <img style="${nextCardArrow}" onclick="nextCard(${i})" class="rightArrowStyle" src="src/img/right.png" alt="">
             </div>
             <div class="statsNav">
                 <div id="about" class="stats" onclick="openAbout(${i})">About</div>
@@ -60,6 +60,7 @@ function creatHtmlForFullCard(pj, i) {
         </div>
     `;
 }
+
 
 
 function creatHtmlForAbout(i) {
@@ -101,13 +102,6 @@ function creatHtmlForAbout(i) {
     `;
 }
 
-function checkIfthere(i) {
-    if(breeding[i].egg_groups[1]) {
-        return capitalizeFirstLetter(breeding[i].egg_groups[1].name);
-    } else {
-        return '-';
-    }
-}
 
 
 function createHtmlForAbilities(ability) {
