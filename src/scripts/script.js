@@ -195,9 +195,7 @@ function previousCard(i) {
 // === SEARCH-FUNCTIONS ===
 
 async function searchPokemon() {
-    // if(!checkIfInput()) {
-    //     return;
-    // } 
+    if (document.getElementById('inputSearch').value == 0) return;
     showLoader();
     document.getElementById('cardContainer').innerHTML = '';
     allPokemon = [];
@@ -225,14 +223,6 @@ async function searchForPokemonInPokemonNames() {
     }
     search.value = '';
 }
-
-
-// function checkIfInput() {
-//     let search = document.getElementById('inputSearch').value;
-//     if (!search) {
-//         return;
-//     } 
-// }
 
 
 function renderSearchedPokemon() {
