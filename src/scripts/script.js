@@ -1,5 +1,5 @@
 let start = 1;
-let endOf = 25;
+let endOf = 24;
 let allPokemon = [];
 let pokemonNames = [];
 let allTypes = [];

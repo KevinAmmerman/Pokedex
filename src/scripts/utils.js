@@ -69,8 +69,8 @@ function addActiveClass(id) {
 
 
 function moreCards() {
-    start = start + 25;
-    endOf = endOf + 25;
+    start = start + 24;
+    endOf = endOf + 24;
     // resetTypes();
     init();
 }
@@ -138,7 +138,7 @@ function resetSearch() {
 
 function resetAllJsonAndVariables() {
     start = 1;
-    endOf = 25;
+    endOf = 24;
     allPokemon = [];
     pokemonNames = [];
     allTypes = [];
