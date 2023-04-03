@@ -107,6 +107,7 @@ function checkIfthere(i) {
 }
 
 
+
 function previousCardCheck(i) {
     if (i === 0) {
         return 'display: none';
@@ -114,6 +115,8 @@ function previousCardCheck(i) {
         return ''
     }
 }
+
+
 
 function nextCardCheck(i) {
     if (i == allPokemon.length - 1) {
@@ -123,11 +126,15 @@ function nextCardCheck(i) {
     }
 }
 
+
+
 function resetSearch() {
     resetAllJsonAndVariables();
     document.getElementById('cardContainer').innerHTML = '';
     init();
 }
+
+
 
 function resetAllJsonAndVariables() {
     start = 1;
@@ -138,4 +145,19 @@ function resetAllJsonAndVariables() {
     breeding = [];
     renderTypeIndex = 0;
     renderPokemonIndex = 0;
+}
+
+
+
+function saveCards() {
+    let cardsAsText = JSON.stringify(myCards);
+    localStorage.setItem('cards', cardsAsText);
+}
+
+
+function loadCards() {
+    let cardsAsText = localStorage.getItem('cards');
+    if (cardsAsText) {
+        myCards = JSON.parse(cardsAsText);
+    }
 }

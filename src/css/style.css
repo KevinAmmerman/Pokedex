@@ -407,7 +407,7 @@ main {
     width: 100px;
 }
 
-/* === PROGRESS-BAR-SECTIO === */
+/* === PROGRESS-BAR-SECTION === */
 
 .progressBarContainer {
     display: flex;
@@ -454,4 +454,18 @@ main {
 
 .typeMoves {
     width: 93%;
+}
+
+/* === MY-CARD-SECTION === */
+
+.favoritesBtn {
+    background-color: #FFCB03;
+    padding: 6px;
+    border: 4px solid #3663AD;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.favoritesBtn:hover {
+    transform: scale(1.1);
 }

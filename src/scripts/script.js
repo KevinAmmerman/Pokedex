@@ -4,6 +4,7 @@ let allPokemon = [];
 let pokemonNames = [];
 let allTypes = [];
 let breeding = [];
+let myCards = [];
 let renderTypeIndex = 0;
 let renderPokemonIndex = 0;
 
@@ -11,6 +12,7 @@ let renderPokemonIndex = 0;
 // This is the inital function what starts other functions
 
 async function init() {
+    loadCards();
     blurBackground();
     showLoader();
     await loadPokemon();
@@ -242,3 +244,40 @@ function renderTypesSearch() {
         }
     }
 }
+
+
+// === MY-CARDS-SECTION ===
+
+
+function addOrDeleteMyCards(i) {
+    let card = checkIfCardIsInMyCards(i);
+    if (card != -1) {
+        document.getElementById('likeBtn').src = 'src/img/heart-empty.png';
+        myCards.splice(card, 1);
+        saveCards();
+        return;
+    } else {
+        myCards.push(i);
+        document.getElementById('likeBtn').src = 'src/img/heart-full.png';
+    }
+    saveCards();
+}
+
+
+
+function checkIfCardIsInMyCards(i) {
+    let index = myCards.indexOf(i);
+    return index;
+}
+
+
+
+function openMyCards() {
+    for (let i = 0; i < myCards.length; i++) {
+        const cardIndex = myCards[i];
+        let card = allPokemon[cardIndex];
+        console.log('Check', card);
+    }
+}
+
+

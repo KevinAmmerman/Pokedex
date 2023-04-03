@@ -31,9 +31,10 @@ function creatHtmlForFullCard(i) {
     let previousCardArrow = previousCardCheck(i);
     let nextCardArrow = nextCardCheck(i);
     let actualColor = setPokemonListCardsBgr(allPokemon[i].types[0].type.name);
+    let cardStatus = checkCardStatus(i);
     return /*html*/ `
         <div class="topPart" style="background-color: ${actualColor};">
-            <img class="likeBtn" src="src/img/heart-empty.png" alt="">
+            <img onclick="addOrDeleteMyCards(${i})" class="likeBtn" id="likeBtn" src="${cardStatus}" alt="">
             <img onclick="closeCard()" class="closeBtn" src="src/img/close.png" alt="">
             <h1 class="fullCardName">${pokemonName}</h1>
             <div id="fullCardTypeContainer${i}" class="fullCardTypeContainer">
@@ -59,6 +60,15 @@ function creatHtmlForFullCard(i) {
             </div>
         </div>
     `;
+}
+
+
+function checkCardStatus(i) {
+    if (myCards.includes(i)) {
+        return 'src/img/heart-full.png';
+    } else {
+        return 'src/img/heart-empty.png';
+    }
 }
 
 
@@ -153,7 +163,7 @@ function creatHtmlForBaseStats(i) {
             <div class="statsBarRow">
                 <div class="statName">Speed</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${speed / 1.7}%; background-color: #E5C600;">${speed}</div>
+                    <div class="progressBar" style="width: ${speed / 1.7}%; background-color: #F26200;">${speed}</div>
                 </div>
             </div>
         </div>
