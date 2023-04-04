@@ -68,6 +68,24 @@ function addActiveClass(id) {
 
 
 
+function checkIndexforFullCard(myCard, cI, i) {
+    if (myCard) {
+        return `openFullCard(${cI})`;
+    } else {
+        return `openFullCard(${i})`;
+    }
+}
+
+function checkIdforTypeContainer(myCard, i) {
+    if(myCard) {
+        return `myCardTypeContainer${i}`;
+    } else {
+        return `typeContainer${i}`;
+    }
+}
+
+
+
 function moreCards() {
     start = start + 24;
     endOf = endOf + 24;
@@ -145,6 +163,17 @@ function resetAllJsonAndVariables() {
     breeding = [];
     renderTypeIndex = 0;
     renderPokemonIndex = 0;
+}
+
+
+
+function switchContainer() {
+    let mainContainer = document.getElementById('cardContainer');
+    let myCardContainer = document.getElementById('myCardsContainer');
+    let myCardBtn = document.getElementById('favoritesBtn');
+    mainContainer.classList.toggle('dNone');
+    myCardContainer.classList.toggle('dNone');
+    myCardBtn.classList.toggle('glowBtn');
 }
 
 

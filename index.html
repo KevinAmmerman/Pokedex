@@ -20,7 +20,7 @@
 <body onload="init()">
     <header>
         <img src="src/img/pokemon-logo.png" alt="">
-        <div onclick="openMyCards()" class="favoritesBtn">My cards</div>
+        <div onclick="openMyCards()" class="favoritesBtn" id="favoritesBtn" title="Open/Close">My cards</div>
         <div class="searchContainer">
             <input placeholder="Search for Pokemon" type="text" id="inputSearch">
             <button onclick="searchPokemon()">Go</button>
@@ -28,9 +28,8 @@
         </div>
     </header>
     <main id="mainSection">
-        <div id="cardContainer">
-
-        </div>
+        <div id="cardContainer"></div>
+        <div id="myCardsContainer" class="dNone"></div>
     </main>
     <div onclick="moreCards()" class="moreBtn" style="cursor: pointer;">More</div>
     <section id="fullCardContainer" class="fullCardContainer" onclick="closeCard()" style="display: none;">

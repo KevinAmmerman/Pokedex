@@ -1,18 +1,21 @@
-function createHtmlForPokemonSmallCard(currentPokemon, i) {
+function createHtmlForPokemonSmallCard(currentPokemon, i, myCardType, cardIndex) {
     let pokemonName = capitalizeFirstLetter(currentPokemon.name);
     let pokemonNumber = formatNumber(currentPokemon.id);
     let pokemonImage = currentPokemon.sprites.other['official-artwork'].front_default;
     let actualColor = setPokemonListCardsBgr(currentPokemon.types[0].type.name);
+    let TypeContainer = checkIdforTypeContainer(myCardType, i);
+    let openFullCard = checkIndexforFullCard(myCardType, cardIndex, i)
     return `
-        <div onclick="openFullCard(${i})" class="cardSmall" style="background-color: ${actualColor}">
+        <div onclick="${openFullCard}" class="cardSmall" style="background-color: ${actualColor}">
             <h1 class="cardName">${pokemonName}</h1>
-            <div id="typeContainer${i}" class="typeContainer"></div>
+            <div id="${TypeContainer}" class="typeContainer"></div>
             <div class="cardOrder">${pokemonNumber}</div>
             <img class="pokeballImage" src="src/img/Unbenannt.png" alt="">
             <img class="cardImage" src="${pokemonImage}" alt="">
         </div>
     `;
 }
+
 
 
 

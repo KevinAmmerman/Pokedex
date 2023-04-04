@@ -235,7 +235,7 @@ function renderSearchedPokemon() {
 }
 
 
-function renderTypesSearch() {
+function renderTypesSearch(allPokemon) {
     for (let i = 0; i < allPokemon.length; i++) {
         const currentPokemon = allPokemon[i];
         for (let j = 0; j < currentPokemon.types.length; j++) {
@@ -248,18 +248,25 @@ function renderTypesSearch() {
 
 // === MY-CARDS-SECTION ===
 
+function openMyCards() {
+    renderMyCards();
+    switchContainer();
+}
+
 
 function addOrDeleteMyCards(i) {
     let card = checkIfCardIsInMyCards(i);
     if (card != -1) {
         document.getElementById('likeBtn').src = 'src/img/heart-empty.png';
         myCards.splice(card, 1);
+        renderMyCards();
         saveCards();
         return;
     } else {
         myCards.push(i);
         document.getElementById('likeBtn').src = 'src/img/heart-full.png';
     }
+    renderMyCards();
     saveCards();
 }
 
@@ -272,12 +279,22 @@ function checkIfCardIsInMyCards(i) {
 
 
 
-function openMyCards() {
+function renderMyCards() {
+    let myCardContainer = document.getElementById('myCardsContainer');
+    myCardContainer.innerHTML = '';
     for (let i = 0; i < myCards.length; i++) {
         const cardIndex = myCards[i];
         let card = allPokemon[cardIndex];
         console.log('Check', card);
+        document.getElementById('myCardsContainer').innerHTML += createHtmlForPokemonSmallCard(card, i, 'myCardTypeContainer', cardIndex);
+        renderTypesMyCards(card, i);
     }
 }
 
 
+function renderTypesMyCards(card, j) {
+    for (let i = 0; i < card.types.length; i++) {
+        const type = card.types[i].type.name;
+        document.getElementById(`myCardTypeContainer${j}`).innerHTML += createHtmlForTypes(type);
+    }
+}

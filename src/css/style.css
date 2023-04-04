@@ -53,6 +53,14 @@ body {
     margin-top: 22px;
 }
 
+.dNone {
+    display: none !important;
+}
+
+.glowBtn {
+    box-shadow: 0 0 20px 10px rgba(255, 255, 0, 0.3);
+}
+
 /* === LOADING-SCREEN === */
 
 #loadingContainer {
@@ -326,13 +334,15 @@ main {
     top: 8px;
 }
 
-.leftArrowStyle, .rightArrowStyle {
+.leftArrowStyle,
+.rightArrowStyle {
     height: 35px;
     cursor: pointer;
     opacity: .7;
 }
 
-.leftArrowStyle:hover, .rightArrowStyle:hover {
+.leftArrowStyle:hover,
+.rightArrowStyle:hover {
     transform: scale(1.1);
 }
 
@@ -382,7 +392,7 @@ main {
     flex-direction: column;
     padding-top: 15px;
     padding-left: 20px;
-    
+
 }
 
 .aboutRow {
@@ -457,6 +467,13 @@ main {
 }
 
 /* === MY-CARD-SECTION === */
+
+#myCardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: center;
+}
 
 .favoritesBtn {
     background-color: #FFCB03;
