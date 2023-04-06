@@ -149,6 +149,7 @@ function nextCardCheck(i) {
 function resetSearch() {
     resetAllJsonAndVariables();
     document.getElementById('cardContainer').innerHTML = '';
+    displayedPokemon = [];
     init();
 }
 
