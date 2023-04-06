@@ -27,13 +27,13 @@ function createHtmlForTypes(type, cl) {
 }
 
 
-function creatHtmlForFullCard(i) {
-    let pokemonName = capitalizeFirstLetter(allPokemon[i].name);
-    let pokemonNumber = formatNumber(allPokemon[i].id);
-    let pokemonImage = allPokemon[i].sprites.other['official-artwork'].front_default;
+function creatHtmlForFullCard(i, pJ) {
+    let pokemonName = capitalizeFirstLetter(pJ[i].name);
+    let pokemonNumber = formatNumber(pJ[i].id);
+    let pokemonImage = pJ[i].sprites.other['official-artwork'].front_default;
     let previousCardArrow = previousCardCheck(i);
-    let nextCardArrow = nextCardCheck(i);
-    let actualColor = setPokemonListCardsBgr(allPokemon[i].types[0].type.name);
+    let nextCardArrow = nextCardCheck(i, pJ);
+    let actualColor = setPokemonListCardsBgr(pJ[i].types[0].type.name);
     let cardStatus = checkCardStatus(i);
     return /*html*/ `
         <div class="topPart" style="background-color: ${actualColor};">
@@ -76,10 +76,10 @@ function checkCardStatus(i) {
 
 
 
-function creatHtmlForAbout(i) {
-    let height = allPokemon[i].height * 10;
-    let weight = allPokemon[i].weight / 10;
-    let bs = allPokemon[i].base_experience;
+function creatHtmlForAbout(i, pJ) {
+    let height = pJ[i].height * 10;
+    let weight = pJ[i].weight / 10;
+    let bs = pJ[i].base_experience;
     let eg = capitalizeFirstLetter(breeding[i].egg_groups[0].name);
     let ec = checkIfthere(i);
     return /*html*/ `

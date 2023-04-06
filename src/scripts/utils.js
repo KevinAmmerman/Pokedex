@@ -69,16 +69,20 @@ function addActiveClass(id) {
 
 
 function checkIndexforFullCard(myCard, cI, i) {
-    if (myCard) {
-        return `openFullCard(${cI})`;
+    if (myCard == 'myCardTypeContainer') {
+        return `openFullCard(${i}, searchedPokemon)`;
+    } else if (myCard == 'true') {
+        return `openFullCard(${i}, searchedPokemon)`;
     } else {
-        return `openFullCard(${i})`;
+        return `openFullCard(${i}, displayedPokemon)`;
     }
 }
 
 function checkIdforTypeContainer(myCard, i) {
-    if(myCard) {
+    if (myCard == 'myCardTypeContainer') {
         return `myCardTypeContainer${i}`;
+    } else if (myCard == 'true') {
+        return `typeContainer${i}`;
     } else {
         return `typeContainer${i}`;
     }
@@ -136,8 +140,8 @@ function previousCardCheck(i) {
 
 
 
-function nextCardCheck(i) {
-    if (i == allPokemon.length - 1) {
+function nextCardCheck(i, pJ) {
+    if (i == pJ.length - 1) {
         return 'display: none';
     } else {
         return ''
