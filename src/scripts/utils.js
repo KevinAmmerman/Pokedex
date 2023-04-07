@@ -68,9 +68,9 @@ function addActiveClass(id) {
 
 
 
-function checkIndexforFullCard(myCard, cI, i) {
+function checkIndexforFullCard(myCard, i) {
     if (myCard == 'myCardTypeContainer') {
-        return `openFullCard(${i}, searchedPokemon)`;
+        return `openFullCard(${i}, myCards)`;
     } else if (myCard == 'true') {
         return `openFullCard(${i}, searchedPokemon)`;
     } else {
@@ -86,6 +86,18 @@ function checkIdforTypeContainer(myCard, i) {
     } else {
         return `typeContainer${i}`;
     }
+}
+
+
+function checkJsonForSwitchCard(pJ) {
+    if (pJ.length == displayedPokemon.length) {
+        return 'displayedPokemon';
+    } else if (pJ.length == myCards.length) {
+        return 'myCards';
+    } else {
+        return 'searchedPokemon';
+    }
+     
 }
 
 

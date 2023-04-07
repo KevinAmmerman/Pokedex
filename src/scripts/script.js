@@ -185,13 +185,13 @@ function renderMoves(i) {
 }
 
 
-function nextCard(i) {
-    openFullCard(i+1)
+function nextCard(i, pJ) {
+    openFullCard(i+1, pJ)
 }
 
 
-function previousCard(i) {
-    openFullCard(i-1)
+function previousCard(i, pJ) {
+    openFullCard(i-1, pJ)
 }
 
 
@@ -255,8 +255,8 @@ function openMyCards() {
 }
 
 
-function addOrDeleteMyCards(i) {
-    let card = checkIfCardIsInMyCards(i);
+function addOrDeleteMyCards(i, pJ) {
+    let card = checkIfCardIsInMyCards(pJ[i].name);
     if (card != -1) {
         document.getElementById('likeBtn').src = 'src/img/heart-empty.png';
         myCards.splice(card, 1);
@@ -264,7 +264,7 @@ function addOrDeleteMyCards(i) {
         saveCards();
         return;
     } else {
-        myCards.push(i);
+        myCards.push(pJ[i]);
         document.getElementById('likeBtn').src = 'src/img/heart-full.png';
     }
     renderMyCards();
@@ -273,9 +273,19 @@ function addOrDeleteMyCards(i) {
 
 
 
-function checkIfCardIsInMyCards(i) {
-    let index = myCards.indexOf(i);
-    return index;
+function checkIfCardIsInMyCards(name) {
+    // let index = myCards.indexOf(i);
+    // return index;
+    if (myCards.length > 0) {
+        for (let i = 0; i < myCards.length; i++) {
+            const cardName = myCards[i].name;
+            if (cardName == name) {
+                return i;
+            }
+        }
+    } else {
+        return -1;
+    }
 }
 
 
@@ -284,18 +294,17 @@ function renderMyCards() {
     let myCardContainer = document.getElementById('myCardsContainer');
     myCardContainer.innerHTML = '';
     for (let i = 0; i < myCards.length; i++) {
-        const cardIndex = myCards[i];
-        let card = displayedPokemon[cardIndex];
-        console.log('Check', card);
-        document.getElementById('myCardsContainer').innerHTML += createHtmlForPokemonSmallCard(card, i, 'myCardTypeContainer', cardIndex);
-        renderTypesMyCards(card, i);
+        const currentPokemon = myCards[i];
+        console.log('Check', currentPokemon);
+        document.getElementById('myCardsContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i, 'myCardTypeContainer');
+        renderTypesMyCards(currentPokemon, i);
     }
 }
 
 
-function renderTypesMyCards(card, j) {
-    for (let i = 0; i < card.types.length; i++) {
-        const type = card.types[i].type.name;
+function renderTypesMyCards(currentPokemon, j) {
+    for (let i = 0; i < currentPokemon.types.length; i++) {
+        const type = currentPokemon.types[i].type.name;
         document.getElementById(`myCardTypeContainer${j}`).innerHTML += createHtmlForTypes(type);
     }
 }

@@ -4,7 +4,7 @@ function createHtmlForPokemonSmallCard(currentPokemon, i, myCardType, cardIndex)
     let pokemonImage = currentPokemon.sprites.other['official-artwork'].front_default;
     let actualColor = setPokemonListCardsBgr(currentPokemon.types[0].type.name);
     let TypeContainer = checkIdforTypeContainer(myCardType, i);
-    let openFullCard = checkIndexforFullCard(myCardType, cardIndex, i)
+    let openFullCard = checkIndexforFullCard(myCardType, i)
     return `
         <div onclick="${openFullCard}" class="cardSmall" style="background-color: ${actualColor}">
             <h1 class="cardName">${pokemonName}</h1>
@@ -34,10 +34,11 @@ function creatHtmlForFullCard(i, pJ) {
     let previousCardArrow = previousCardCheck(i);
     let nextCardArrow = nextCardCheck(i, pJ);
     let actualColor = setPokemonListCardsBgr(pJ[i].types[0].type.name);
-    let cardStatus = checkCardStatus(i);
+    let cardStatus = checkCardStatus(pJ[i].name);
+    let checkCardForJson = checkJsonForSwitchCard(pJ);
     return /*html*/ `
         <div class="topPart" style="background-color: ${actualColor};">
-            <img onclick="addOrDeleteMyCards(${i})" class="likeBtn" id="likeBtn" src="${cardStatus}" alt="">
+            <img onclick="addOrDeleteMyCards(${i}, ${checkCardForJson})" class="likeBtn" id="likeBtn" src="${cardStatus}" alt="">
             <img onclick="closeCard()" class="closeBtn" src="src/img/close.png" alt="">
             <h1 class="fullCardName">${pokemonName}</h1>
             <div id="fullCardTypeContainer${i}" class="fullCardTypeContainer">
@@ -49,8 +50,8 @@ function creatHtmlForFullCard(i, pJ) {
         <img class="fullCardPokeballImage" src="src/img/Unbenannt.png" alt="">
         <div class="bottomPart">
             <div class="arrowContainer">
-                <img style="${previousCardArrow}" onclick="previousCard(${i})" class="leftArrowStyle" src="src/img/left.png" alt="">
-                <img style="${nextCardArrow}" onclick="nextCard(${i})" class="rightArrowStyle" src="src/img/right.png" alt="">
+                <img style="${previousCardArrow}" onclick="previousCard(${i}, ${checkCardForJson})" class="leftArrowStyle" src="src/img/left.png" alt="">
+                <img style="${nextCardArrow}" onclick="nextCard(${i}, ${checkCardForJson})" class="rightArrowStyle" src="src/img/right.png" alt="">
             </div>
             <div class="statsNav">
                 <div id="about" class="stats" onclick="openAbout(${i})">About</div>
@@ -66,14 +67,16 @@ function creatHtmlForFullCard(i, pJ) {
 }
 
 
-function checkCardStatus(i) {
-    if (myCards.includes(i)) {
-        return 'src/img/heart-full.png';
-    } else {
-        return 'src/img/heart-empty.png';
+function checkCardStatus(name) {
+    for (let i = 0; i < myCards.length; i++) {
+        const cardName = myCards[i].name;
+        if (cardName == name) {
+            return 'src/img/heart-full.png';
+        } else {
+            return 'src/img/heart-empty.png';
+        }
     }
 }
-
 
 
 function creatHtmlForAbout(i, pJ) {
