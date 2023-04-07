@@ -186,12 +186,12 @@ function renderMoves(i) {
 
 
 function nextCard(i, pJ) {
-    openFullCard(i+1, pJ)
+    openFullCard(i + 1, pJ)
 }
 
 
 function previousCard(i, pJ) {
-    openFullCard(i-1, pJ)
+    openFullCard(i - 1, pJ)
 }
 
 
@@ -216,7 +216,7 @@ async function searchForPokemonInPokemonNames() {
     searchValue = search.value.toLowerCase();
     for (let i = 0; i < pokemonNames.length; i++) {
         const currentPokemon = pokemonNames[i];
-        if(currentPokemon.includes(searchValue)) {
+        if (currentPokemon.includes(searchValue)) {
             searchedPokemon.push(currentPokemon);
         }
     }
@@ -274,19 +274,17 @@ function addOrDeleteMyCards(i, pJ) {
 
 
 function checkIfCardIsInMyCards(name) {
-    // let index = myCards.indexOf(i);
-    // return index;
-    if (myCards.length > 0) {
+    if (Array.isArray(myCards)) {
         for (let i = 0; i < myCards.length; i++) {
             const cardName = myCards[i].name;
             if (cardName == name) {
                 return i;
             }
         }
-    } else {
-        return -1;
+        return -1; // das Statement wird nur ausgeführt, wenn keine Übereinstimmung gefunden wurde
     }
 }
+
 
 
 

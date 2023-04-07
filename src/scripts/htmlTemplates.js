@@ -68,13 +68,17 @@ function creatHtmlForFullCard(i, pJ) {
 
 
 function checkCardStatus(name) {
-    for (let i = 0; i < myCards.length; i++) {
-        const cardName = myCards[i].name;
-        if (cardName == name) {
-            return 'src/img/heart-full.png';
-        } else {
-            return 'src/img/heart-empty.png';
+    if (myCards.length > 0) {
+        for (let i = 0; i < myCards.length; i++) {
+            const cardName = myCards[i].name;
+            if (cardName == name) {
+                return 'src/img/heart-full.png';
+            } else {
+                return 'src/img/heart-empty.png';
+            }
         }
+    } else {
+        return 'src/img/heart-empty.png';
     }
 }
 
