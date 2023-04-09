@@ -48,6 +48,7 @@ function capitalizeFirstLetter(lu) {
 }
 
 
+// This function that removes the last two characters from the text
 
 function sliceKomma() {
     let abilities = document.getElementById('abilities');
@@ -56,6 +57,7 @@ function sliceKomma() {
     abilities.innerHTML = text;
 }
 
+// This function that adds the "active" CSS class to an HTML element with the given id, while removing the "active" class from any other element that has the same class. The function is intended to be used to toggle the "active" state of multiple elements.
 
 function addActiveClass(id) {
     const elements = document.querySelectorAll('.active');
@@ -66,7 +68,7 @@ function addActiveClass(id) {
     active.classList.add('active');
 }
 
-
+// This function checks what json array is needed and returns it
 
 function checkIndexforFullCard(myCard, i) {
     if (myCard == 'myCardTypeContainer') {
@@ -78,6 +80,8 @@ function checkIndexforFullCard(myCard, i) {
     }
 }
 
+// This function checks what id is needed for the container and returns it
+
 function checkIdforTypeContainer(myCard, i) {
     if (myCard == 'myCardTypeContainer') {
         return `myCardTypeContainer${i}`;
@@ -88,6 +92,7 @@ function checkIdforTypeContainer(myCard, i) {
     }
 }
 
+// This function checks what json array it need to use, to switch between cards
 
 function checkJsonForSwitchCard(pJ) {
     if (pJ.length == displayedPokemon.length) {
@@ -96,41 +101,55 @@ function checkJsonForSwitchCard(pJ) {
         return 'myCards';
     } else {
         return 'searchedPokemon';
-    }
-     
+    }    
 }
 
+// This function checks if the card is already in myCard to return the source of image
 
+function checkCardStatus(name) {
+    if (Array.isArray(myCards)) {
+        for (let i = 0; i < myCards.length; i++) {
+            const cardName = myCards[i].name;
+            if (cardName === name) {
+                return 'src/img/heart-full.png';
+            } 
+        }
+        return 'src/img/heart-empty.png';
+    } 
+}
+
+// This function changes the variables for the amount of loaded pokemon cards
 
 function moreCards() {
     start = start + 24;
     endOf = endOf + 24;
-    // resetTypes();
     init();
 }
 
-
+// This function to close the full card 
 
 function closeCard() {
     document.getElementById('fullCardContainer').style.display = 'none';
     let card = document.getElementById('card');
     card.innerHTML = '';
     card.style = '';
-    // blurBackground();
+    blurBackground();
 }
 
-
+// Function to prefent action for parrent elements
 
 function doNotClose(event) {
     event.stopPropagation();
 }
 
+// Function to blur the background
 
 function blurBackground() {
     let main = document.getElementById('mainSection');
     main.classList.toggle('blur');
 }
 
+// This function checks if the second egg_group is available, if not returns -
 
 function checkIfthere(i) {
     if (breeding[i].egg_groups[1]) {
@@ -140,7 +159,18 @@ function checkIfthere(i) {
     }
 }
 
+// This two functions are from moving the back and forwards between cards
 
+function nextCard(i, pJ) {
+    openFullCard(i + 1, pJ)
+}
+
+
+function previousCard(i, pJ) {
+    openFullCard(i - 1, pJ)
+}
+
+//  This two function check if there is a card before and after the current open full card and displayes or not the arrow
 
 function previousCardCheck(i) {
     if (i === 0) {
@@ -151,7 +181,6 @@ function previousCardCheck(i) {
 }
 
 
-
 function nextCardCheck(i, pJ) {
     if (i == pJ.length - 1) {
         return 'display: none';
@@ -160,7 +189,18 @@ function nextCardCheck(i, pJ) {
     }
 }
 
+// This function checks if there is a card before or after the displayed full card, to jump to the next/last if deleted out of myCards array
 
+function checkIndexOfJson(i, pJ) {
+    if(i == 0) {
+        return nextCard(i-1, pJ);
+    }
+    if(i <= pJ.length) {
+        return previousCard(i, pJ);
+    }
+}
+
+// This function resets the search field and starts the i
 
 function resetSearch() {
     resetAllJsonAndVariables();
@@ -169,7 +209,7 @@ function resetSearch() {
     init();
 }
 
-
+// This function resets variables and arrays to default
 
 function resetAllJsonAndVariables() {
     start = 1;
@@ -182,7 +222,7 @@ function resetAllJsonAndVariables() {
     renderPokemonIndex = 0;
 }
 
-
+// This function toggles classes to open myCards and add a glow to the button
 
 function switchContainer() {
     let mainContainer = document.getElementById('cardContainer');
@@ -194,6 +234,21 @@ function switchContainer() {
 }
 
 
+// This function checks if a certain card is already in the array of myCards
+
+function checkIfCardIsInMyCards(name) {
+    if (Array.isArray(myCards)) {
+        for (let i = 0; i < myCards.length; i++) {
+            const cardName = myCards[i].name;
+            if (cardName == name) {
+                return i;
+            }
+        }
+        return -1; 
+    }
+}
+
+// This two function save and load the myCards Array in the/from the local storage
 
 function saveCards() {
     let cardsAsText = JSON.stringify(myCards);

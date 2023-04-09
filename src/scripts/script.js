@@ -113,6 +113,8 @@ function openFullCard(i, pokemonJson) {
     renderTypesForFullCard(i);
     renderSpecs(i, pokemonJson);
     renderAbilities(i, pokemonJson);
+    if (document.getElementById('mainSection').classList.contains('blur')) return;
+    blurBackground();
 }
 
 
@@ -127,10 +129,10 @@ function renderTypesForFullCard(i) {
 
 
 
-function openAbout(i) {
+function openAbout(i, pJ) {
     addActiveClass('about');
-    renderSpecs(i);
-    renderAbilities(i)
+    renderSpecs(i, pJ);
+    renderAbilities(i, pJ)
 }
 
 
@@ -150,20 +152,20 @@ function renderAbilities(i, pJ) {
 }
 
 
-function openBaseStats(i) {
+function openBaseStats(i, pJ) {
     addActiveClass('baseStats');
     let barContainer = document.getElementById('infoPokemon');
     barContainer.innerHTML = '';
-    barContainer.innerHTML = creatHtmlForBaseStats(i);
+    barContainer.innerHTML = creatHtmlForBaseStats(i, pJ);
 }
 
 
-function openMoves(i) {
+function openMoves(i, pJ) {
     let infoContainer = document.getElementById('infoPokemon');
     infoContainer.innerHTML = '';
     addActiveClass('moves');
     createMoveContainer();
-    renderMoves(i);
+    renderMoves(i, pJ);
 }
 
 
@@ -176,22 +178,12 @@ function createMoveContainer() {
 }
 
 
-function renderMoves(i) {
+function renderMoves(i, pJ) {
     let movesContainer = document.getElementById('movesContainer')
-    for (let j = 0; j < displayedPokemon[i].moves.length; j++) {
-        const move = displayedPokemon[i].moves[j].move.name;
+    for (let j = 0; j < pJ[i].moves.length; j++) {
+        const move = pJ[i].moves[j].move.name;
         movesContainer.innerHTML += createHtmlForMoves(move);
     }
-}
-
-
-function nextCard(i, pJ) {
-    openFullCard(i + 1, pJ)
-}
-
-
-function previousCard(i, pJ) {
-    openFullCard(i - 1, pJ)
 }
 
 
@@ -262,6 +254,7 @@ function addOrDeleteMyCards(i, pJ) {
         myCards.splice(card, 1);
         renderMyCards();
         saveCards();
+        checkIndexOfJson(i, pJ);
         return;
     } else {
         myCards.push(pJ[i]);
@@ -270,21 +263,6 @@ function addOrDeleteMyCards(i, pJ) {
     renderMyCards();
     saveCards();
 }
-
-
-
-function checkIfCardIsInMyCards(name) {
-    if (Array.isArray(myCards)) {
-        for (let i = 0; i < myCards.length; i++) {
-            const cardName = myCards[i].name;
-            if (cardName == name) {
-                return i;
-            }
-        }
-        return -1; // das Statement wird nur ausgeführt, wenn keine Übereinstimmung gefunden wurde
-    }
-}
-
 
 
 

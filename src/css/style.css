@@ -104,7 +104,7 @@ header {
     background: linear-gradient(to bottom, #1A1B1F, #202124);
 }
 
-header>img {
+header>a>img {
     height: 80px;
     padding-left: 24px;
 }
@@ -180,6 +180,7 @@ main {
     padding: 4px 16px 4px 16px;
     border-radius: 25px;
     margin-bottom: 6px;
+    text-align: center;
 }
 
 .pokeballImage {
@@ -283,7 +284,7 @@ main {
 .fullCardTypeContainer {
     color: white;
     position: absolute;
-    top: 115px;
+    top: 150px;
     left: 20px;
     display: flex;
     flex-direction: column;
@@ -451,11 +452,24 @@ main {
 
 .progressBar {
     height: 100%;
+    width: 0%;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     font-size: .8rem;
+    /* animation: statsBarAnimation 325ms ease-in-out; */
+    transition: width 325ms ease-in-out;
 }
+
+/* @keyframes statsBarAnimation {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 0;
+    }
+} */
 
 .movesContainer {
     display: flex;
