@@ -100,49 +100,8 @@ function checkJsonForSwitchCard(pJ) {
     } else if (pJ.length == pokemon.myCards.length) {
         return 'pokemon.myCards';
     } else {
-        return 'pokemon.searchedPokemon';
+        return 'searchedPokemon';
     }    
-}
-
-
-
-function checkBreedingJson(pJ) {
-    if (pJ.length == pokemon.displayedPokemon.length) {
-        return pokemonBreeding.displayedPokemonBre;
-    } else if (pJ.length == pokemon.myCards.length) {
-        return pokemonBreeding.myCardsBre;
-    } else {
-        return pokemonBreeding.searchedPokemonBre;
-    }  
-}
-
-
-function checkIfEggGroupExists(breeding, i) {
-    if (breeding[i].egg_groups.length == 0) {
-        return '-';
-    } else {
-        return capitalizeFirstLetter(breeding[i].egg_groups[0].name);
-    }
-}
-
-// This function checks if the second egg_group is available, if not returns -
-
-function checkIfthere(breeding, i) {
-    if (breeding[i].egg_groups[1]) {
-        return capitalizeFirstLetter(breeding[i].egg_groups[1].name);
-    } else {
-        return '-';
-    }
-}
-
-
-
-function checkIfBaseExperienceExists(pJ, i) {
-    if (pJ[i].base_experience) {
-        return pJ[i].base_experience;
-    } else {
-        return '-';
-    }
 }
 
 // This function checks if the card is already in myCard to return the source of image
