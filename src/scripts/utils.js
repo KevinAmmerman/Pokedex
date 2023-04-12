@@ -164,6 +164,7 @@ function checkCardStatus(name) {
 function moreCards() {
     start = start + 24;
     endOf = endOf + 24;
+    pokemonBreeding.displayedPokemonBre = [];
     init();
 }
 
@@ -263,9 +264,11 @@ function switchContainer() {
     let mainContainer = document.getElementById('cardContainer');
     let myCardContainer = document.getElementById('myCardsContainer');
     let myCardBtn = document.getElementById('favoritesBtn');
+    let moreCardsBtn = document.getElementById('moreBtn');
     mainContainer.classList.toggle('dNone');
     myCardContainer.classList.toggle('dNone');
     myCardBtn.classList.toggle('glowBtn');
+    moreCardsBtn.classList.toggle('dNone');
 }
 
 
