@@ -136,17 +136,6 @@ function checkIfthere(breeding, i) {
 }
 
 
-function checkForSpecies() {
-    pokemonBreeding.searchedPokemonBre = [];
-    for (let i = 0; i < pokemon.searchedPokemon.length; i++) {
-        const name = pokemon.searchedPokemon[i].species.name;
-        if (pokemon.searchedPokemon[i].name.includes(name)) {
-            loadBreeding('searchedPokemonBre', name);
-        } else {
-            loadBreeding('searchedPokemonBre', pokemon.searchedPokemon[i].name)
-        }
-    }
-}
 
 function checkIfBaseExperienceExists(pJ, i) {
     if (pJ[i].base_experience) {

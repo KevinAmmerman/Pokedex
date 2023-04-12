@@ -23,6 +23,7 @@ async function init() {
     showLoader();
     await loadPokemon();
     await loadPokemonNames();
+    loadBreeding('displayedPokemonBre', pokemon.displayedPokemon);
     blurBackground();
     hideLoader();
     renderPokemon();
@@ -37,7 +38,7 @@ async function loadPokemon() {
         let response = await fetch(url);
         let currentPokemon = await response.json();
         pokemon.displayedPokemon.push(currentPokemon);
-        loadBreeding('displayedPokemonBre', i);
+        // loadBreeding('displayedPokemonBre', i);
     }
 }
 
@@ -64,11 +65,14 @@ async function loadPokemonNames() {
 
 
 
-async function loadBreeding(pjb, i) {
-    let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
-    let response = await fetch(url);
-    let breed = await response.json();
-    pokemonBreeding[pjb].push(breed);
+async function loadBreeding(pjb, pJ) {
+    for (let i = 0; i < pJ.length; i++) {
+        const speciesUrl = pJ[i].species.url;
+        let url = speciesUrl;
+        let response = await fetch(url);
+        let breed = await response.json();
+        pokemonBreeding[pjb].push(breed);
+    }
     saveCards();
 }
 
@@ -190,7 +194,7 @@ async function searchPokemon() {
     document.getElementById('cardContainer').innerHTML = '';
     pokemon.searchedPokemon = [];
     await searchForPokemonInPokemonNames();
-    checkForSpecies();
+    loadBreeding('searchedPokemonBre', pokemon.searchedPokemon);
     renderSearchedPokemon();
     renderTypesSearch();
     hideLoader();
@@ -256,22 +260,11 @@ function addOrDeleteMyCards(i, pJ) {
         return;
     } else {
         pokemon.myCards.push(pJ[i]);
+        pokemonBreeding.myCardsBre.push(checkBreedingJson(pJ)[i])
         document.getElementById('likeBtn').src = 'src/img/heart-full.png';
     }
-    checkNumberOfPokemonForBreeding(i, pJ);
     renderMyCards();
     saveCards();
-}
-
-
-function checkNumberOfPokemonForBreeding(i, pJ) {
-    let currentPokemon = pJ[i].name;
-    for (let i = 0; i < pokemonNames.length; i++) {
-        const listName = pokemonNames[i];
-        if (currentPokemon == listName) {
-            loadBreeding('myCardsBre', i + 1);
-        }
-    }
 }
 
 
