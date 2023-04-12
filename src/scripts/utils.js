@@ -100,8 +100,49 @@ function checkJsonForSwitchCard(pJ) {
     } else if (pJ.length == pokemon.myCards.length) {
         return 'pokemon.myCards';
     } else {
-        return 'searchedPokemon';
+        return 'pokemon.searchedPokemon';
     }    
+}
+
+
+
+function checkBreedingJson(pJ) {
+    if (pJ.length == pokemon.displayedPokemon.length) {
+        return pokemonBreeding.displayedPokemonBre;
+    } else if (pJ.length == pokemon.myCards.length) {
+        return pokemonBreeding.myCardsBre;
+    } else {
+        return pokemonBreeding.searchedPokemonBre;
+    }  
+}
+
+
+function checkIfEggGroupExists(breeding, i) {
+    if (breeding[i].egg_groups.length == 0) {
+        return '-';
+    } else {
+        return capitalizeFirstLetter(breeding[i].egg_groups[0].name);
+    }
+}
+
+// This function checks if the second egg_group is available, if not returns -
+
+function checkIfthere(breeding, i) {
+    if (breeding[i].egg_groups[1]) {
+        return capitalizeFirstLetter(breeding[i].egg_groups[1].name);
+    } else {
+        return '-';
+    }
+}
+
+
+
+function checkIfBaseExperienceExists(pJ, i) {
+    if (pJ[i].base_experience) {
+        return pJ[i].base_experience;
+    } else {
+        return '-';
+    }
 }
 
 // This function checks if the card is already in myCard to return the source of image
@@ -222,11 +263,9 @@ function switchContainer() {
     let mainContainer = document.getElementById('cardContainer');
     let myCardContainer = document.getElementById('myCardsContainer');
     let myCardBtn = document.getElementById('favoritesBtn');
-    let moreCardsBtn = document.getElementById('moreBtn');
     mainContainer.classList.toggle('dNone');
     myCardContainer.classList.toggle('dNone');
     myCardBtn.classList.toggle('glowBtn');
-    moreCardsBtn.classList.toggle('dNone');
 }
 
 

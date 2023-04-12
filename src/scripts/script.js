@@ -11,16 +11,6 @@ let pokemonBreeding = {
     searchedPokemonBre: [],
     myCardsBre: [],
 };
-let pokemon = {
-    displayedPokemon: [],
-    searchedPokemon: [],
-    myCards: []
-};
-let pokemonBreeding = {
-    displayedPokemonBre: [],
-    searchedPokemonBre: [],
-    myCardsBre: [],
-};
 let renderTypeIndex = 0;
 let renderPokemonIndex = 0;
 
@@ -75,13 +65,15 @@ async function loadPokemonNames() {
 
 
 
-async function loadBreeding() {
-    for (let i = 1; i <= displayedPokemon.length; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
+async function loadBreeding(pjb, pJ) {
+    for (let i = 0; i < pJ.length; i++) {
+        const speciesUrl = pJ[i].species.url;
+        let url = speciesUrl;
         let response = await fetch(url);
         let breed = await response.json();
-        breeding.push(breed);
+        pokemonBreeding[pjb].push(breed);
     }
+    saveCards();
 }
 
 // === SMALL-CARD-FUNCTIONS ===
@@ -202,6 +194,7 @@ async function searchPokemon() {
     document.getElementById('cardContainer').innerHTML = '';
     pokemon.searchedPokemon = [];
     await searchForPokemonInPokemonNames();
+    loadBreeding('searchedPokemonBre', pokemon.searchedPokemon);
     renderSearchedPokemon();
     renderTypesSearch();
     hideLoader();
@@ -266,23 +259,12 @@ function addOrDeleteMyCards(i, pJ) {
         checkIndexOfJson(i, pJ);
         return;
     } else {
-        myCards.push(pJ[i]);
+        pokemon.myCards.push(pJ[i]);
+        pokemonBreeding.myCardsBre.push(checkBreedingJson(pJ)[i])
         document.getElementById('likeBtn').src = 'src/img/heart-full.png';
     }
-    checkNumberOfPokemonForBreeding(i, pJ);
     renderMyCards();
     saveCards();
-}
-
-
-function checkNumberOfPokemonForBreeding(i, pJ) {
-    let currentPokemon = pJ[i].name;
-    for (let i = 0; i < pokemonNames.length; i++) {
-        const listName = pokemonNames[i];
-        if (currentPokemon == listName) {
-            loadBreeding('myCardsBre', i + 1);
-        }
-    }
 }
 
 
