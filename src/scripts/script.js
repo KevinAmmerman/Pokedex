@@ -1,11 +1,16 @@
 let start = 1;
 let endOf = 24;
-let displayedPokemon = [];
-let searchedPokemon = [];
 let pokemonNames = [];
-let allTypes = [];
-let breeding = [];
-let myCards = [];
+let pokemon = {
+    displayedPokemon: [],
+    searchedPokemon: [],
+    myCards: []
+};
+let pokemonBreeding = {
+    displayedPokemonBre: [],
+    searchedPokemonBre: [],
+    myCardsBre: [],
+};
 let renderTypeIndex = 0;
 let renderPokemonIndex = 0;
 
@@ -18,8 +23,6 @@ async function init() {
     showLoader();
     await loadPokemon();
     await loadPokemonNames();
-    loadBreeding();
-    loadTypes();
     blurBackground();
     hideLoader();
     renderPokemon();
@@ -33,17 +36,18 @@ async function loadPokemon() {
         let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         let response = await fetch(url);
         let currentPokemon = await response.json();
-        displayedPokemon.push(currentPokemon);
+        pokemon.displayedPokemon.push(currentPokemon);
+        loadBreeding('displayedPokemonBre', i);
     }
 }
 
 
 
-async function loadSearchedPokemon(i) {
+async function loadSearchedPokemon(i, j) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
     let currentPokemon = await response.json();
-    searchedPokemon.push(currentPokemon);
+    pokemon.searchedPokemon.push(currentPokemon);
 }
 
 
@@ -60,30 +64,20 @@ async function loadPokemonNames() {
 
 
 
-async function loadBreeding() {
-    for (let i = 1; i <= displayedPokemon.length; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
-        let response = await fetch(url);
-        let breed = await response.json();
-        breeding.push(breed);
-    }
+async function loadBreeding(pjb, i) {
+    let url = `https://pokeapi.co/api/v2/pokemon-species/${i}/`
+    let response = await fetch(url);
+    let breed = await response.json();
+    pokemonBreeding[pjb].push(breed);
+    saveCards();
 }
 
 // === SMALL-CARD-FUNCTIONS ===
 
-// This function pushes the pokemon types into an JSON array
-
-function loadTypes() {
-    for (let i = start - 1; i < displayedPokemon.length; i++) {
-        const type = displayedPokemon[i].types;
-        allTypes.push(type);
-    }
-}
-
 
 function renderPokemon() {
-    for (let i = renderPokemonIndex; i < displayedPokemon.length; i++) {
-        const currentPokemon = displayedPokemon[i];
+    for (let i = renderPokemonIndex; i < pokemon.displayedPokemon.length; i++) {
+        const currentPokemon = pokemon.displayedPokemon[i];
         document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i);
         renderPokemonIndex = i + 1;
     }
@@ -92,11 +86,11 @@ function renderPokemon() {
 // This function iterates through an JSON array to gets every single type
 
 function renderTypes() {
-    for (let i = renderTypeIndex; i < allTypes.length; i++) {
-        const type = allTypes[i];
-        for (let j = 0; j < type.length; j++) {
-            const element = type[j].type.name;
-            document.getElementById(`typeContainer${renderTypeIndex}`).innerHTML += createHtmlForTypes(element);
+    for (let i = renderTypeIndex; i < pokemon.displayedPokemon.length; i++) {
+        const types = pokemon.displayedPokemon[i].types;
+        for (let t = 0; t < types.length; t++) {
+            const type = types[t].type.name;
+            document.getElementById(`typeContainer${renderTypeIndex}`).innerHTML += createHtmlForTypes(type);
         }
         renderTypeIndex = i + 1;
     }
@@ -110,7 +104,7 @@ function openFullCard(i, pokemonJson) {
     card.style = 'z-index: 3;';
     card.innerHTML = creatHtmlForFullCard(i, pokemonJson);
     addActiveClass('about');
-    renderTypesForFullCard(i);
+    renderTypesForFullCard(i, pokemonJson);
     renderSpecs(i, pokemonJson);
     renderAbilities(i, pokemonJson);
     if (document.getElementById('mainSection').classList.contains('blur')) return;
@@ -119,10 +113,10 @@ function openFullCard(i, pokemonJson) {
 
 
 
-function renderTypesForFullCard(i) {
+function renderTypesForFullCard(i, pJ) {
     let styleClass = 'typeFullCard';
-    for (let index = 0; index < allTypes[i].length; index++) {
-        const type = allTypes[i][index].type.name;
+    for (let t = 0; t < pJ[i].types.length; t++) {
+        const type = pJ[i].types[t].type.name;
         document.getElementById(`fullCardTypeContainer${i}`).innerHTML += createHtmlForTypes(type, styleClass);
     }
 }
@@ -190,11 +184,13 @@ function renderMoves(i, pJ) {
 // === SEARCH-FUNCTIONS ===
 
 async function searchPokemon() {
+    resetAllJsonAndVariables();
     if (document.getElementById('inputSearch').value == 0) return;
     showLoader();
     document.getElementById('cardContainer').innerHTML = '';
-    searchedPokemon = [];
+    pokemon.searchedPokemon = [];
     await searchForPokemonInPokemonNames();
+    checkForSpecies();
     renderSearchedPokemon();
     renderTypesSearch();
     hideLoader();
@@ -220,17 +216,18 @@ async function searchForPokemonInPokemonNames() {
 }
 
 
+
 function renderSearchedPokemon() {
-    for (let i = 0; i < searchedPokemon.length; i++) {
-        const currentPokemon = searchedPokemon[i];
+    for (let i = 0; i < pokemon.searchedPokemon.length; i++) {
+        const currentPokemon = pokemon.searchedPokemon[i];
         document.getElementById('cardContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i, 'true');
     }
 }
 
 
 function renderTypesSearch() {
-    for (let i = 0; i < searchedPokemon.length; i++) {
-        const currentPokemon = searchedPokemon[i];
+    for (let i = 0; i < pokemon.searchedPokemon.length; i++) {
+        const currentPokemon = pokemon.searchedPokemon[i];
         for (let j = 0; j < currentPokemon.types.length; j++) {
             const type = currentPokemon.types[j].type.name;
             document.getElementById(`typeContainer${i}`).innerHTML += createHtmlForTypes(type);
@@ -251,17 +248,30 @@ function addOrDeleteMyCards(i, pJ) {
     let card = checkIfCardIsInMyCards(pJ[i].name);
     if (card != -1) {
         document.getElementById('likeBtn').src = 'src/img/heart-empty.png';
-        myCards.splice(card, 1);
+        pokemon.myCards.splice(card, 1);
+        pokemonBreeding.myCardsBre.splice(card, 1);
         renderMyCards();
         saveCards();
         checkIndexOfJson(i, pJ);
         return;
     } else {
-        myCards.push(pJ[i]);
+        pokemon.myCards.push(pJ[i]);
         document.getElementById('likeBtn').src = 'src/img/heart-full.png';
     }
+    checkNumberOfPokemonForBreeding(i, pJ);
     renderMyCards();
     saveCards();
+}
+
+
+function checkNumberOfPokemonForBreeding(i, pJ) {
+    let currentPokemon = pJ[i].name;
+    for (let i = 0; i < pokemonNames.length; i++) {
+        const listName = pokemonNames[i];
+        if (currentPokemon == listName) {
+            loadBreeding('myCardsBre', i + 1);
+        }
+    }
 }
 
 
@@ -269,9 +279,8 @@ function addOrDeleteMyCards(i, pJ) {
 function renderMyCards() {
     let myCardContainer = document.getElementById('myCardsContainer');
     myCardContainer.innerHTML = '';
-    for (let i = 0; i < myCards.length; i++) {
-        const currentPokemon = myCards[i];
-        console.log('Check', currentPokemon);
+    for (let i = 0; i < pokemon.myCards.length; i++) {
+        const currentPokemon = pokemon.myCards[i];
         document.getElementById('myCardsContainer').innerHTML += createHtmlForPokemonSmallCard(currentPokemon, i, 'myCardTypeContainer');
         renderTypesMyCards(currentPokemon, i);
     }

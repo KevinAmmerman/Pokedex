@@ -18,13 +18,13 @@ function createHtmlForPokemonSmallCard(currentPokemon, i, myCardType, cardIndex)
 
 
 
-
 function createHtmlForTypes(type, cl) {
     let upCaseType = capitalizeFirstLetter(type);
     return /*html*/ `
         <div class="type ${cl}">${upCaseType}</div>
     `;
 }
+
 
 
 function creatHtmlForFullCard(i, pJ) {
@@ -69,11 +69,12 @@ function creatHtmlForFullCard(i, pJ) {
 
 
 function creatHtmlForAbout(i, pJ) {
+    let breeding = checkBreedingJson(pJ);
     let height = pJ[i].height * 10;
     let weight = pJ[i].weight / 10;
-    let bs = pJ[i].base_experience;
-    let eg = capitalizeFirstLetter(breeding[i].egg_groups[0].name);
-    let ec = checkIfthere(i);
+    let bs = checkIfBaseExperienceExists(pJ, i);
+    let eg = checkIfEggGroupExists(breeding, i);
+    let ec = checkIfthere(breeding, i);
     return /*html*/ `
         <div class="about">
             <div class="aboutRow">
@@ -164,6 +165,7 @@ function creatHtmlForBaseStats(i, pJ) {
         </div>
     `;
 }
+
 
 
 function createHtmlForMoves(move) {

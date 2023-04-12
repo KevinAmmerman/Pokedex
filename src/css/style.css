@@ -8,7 +8,7 @@ html {
 body {
     margin: 0;
     background-color: #202124;
-    height: 100vh;
+    height: 100%;
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -59,6 +59,14 @@ body {
 
 .glowBtn {
     box-shadow: 0 0 20px 10px rgba(255, 255, 0, 0.3);
+}
+
+.btnStyle {
+    background-color: #FFCB03;
+    padding: 6px;
+    border: 4px solid #3663AD;
+    border-radius: 15px;
+    cursor: pointer;
 }
 
 /* === LOADING-SCREEN === */
@@ -118,6 +126,7 @@ header>a>img {
 main {
     display: flex;
     justify-content: center;
+    margin-bottom: 24px;
 }
 
 #cardContainer {
@@ -457,19 +466,8 @@ main {
     display: flex;
     justify-content: center;
     font-size: .8rem;
-    /* animation: statsBarAnimation 325ms ease-in-out; */
     transition: width 325ms ease-in-out;
 }
-
-/* @keyframes statsBarAnimation {
-    from {
-        width: 0%;
-    }
-
-    to {
-        width: 0;
-    }
-} */
 
 .movesContainer {
     display: flex;
@@ -487,14 +485,6 @@ main {
     flex-wrap: wrap;
     width: 80%;
     justify-content: center;
-}
-
-.favoritesBtn {
-    background-color: #FFCB03;
-    padding: 6px;
-    border: 4px solid #3663AD;
-    border-radius: 15px;
-    cursor: pointer;
 }
 
 .favoritesBtn:hover {

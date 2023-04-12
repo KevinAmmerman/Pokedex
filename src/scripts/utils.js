@@ -72,11 +72,11 @@ function addActiveClass(id) {
 
 function checkIndexforFullCard(myCard, i) {
     if (myCard == 'myCardTypeContainer') {
-        return `openFullCard(${i}, myCards)`;
+        return `openFullCard(${i}, pokemon.myCards)`;
     } else if (myCard == 'true') {
-        return `openFullCard(${i}, searchedPokemon)`;
+        return `openFullCard(${i}, pokemon.searchedPokemon)`;
     } else {
-        return `openFullCard(${i}, displayedPokemon)`;
+        return `openFullCard(${i}, pokemon.displayedPokemon)`;
     }
 }
 
@@ -95,21 +95,73 @@ function checkIdforTypeContainer(myCard, i) {
 // This function checks what json array it need to use, to switch between cards
 
 function checkJsonForSwitchCard(pJ) {
-    if (pJ.length == displayedPokemon.length) {
-        return 'displayedPokemon';
-    } else if (pJ.length == myCards.length) {
-        return 'myCards';
+    if (pJ.length == pokemon.displayedPokemon.length) {
+        return 'pokemon.displayedPokemon';
+    } else if (pJ.length == pokemon.myCards.length) {
+        return 'pokemon.myCards';
     } else {
-        return 'searchedPokemon';
+        return 'pokemon.searchedPokemon';
     }    
+}
+
+
+
+function checkBreedingJson(pJ) {
+    if (pJ.length == pokemon.displayedPokemon.length) {
+        return pokemonBreeding.displayedPokemonBre;
+    } else if (pJ.length == pokemon.myCards.length) {
+        return pokemonBreeding.myCardsBre;
+    } else {
+        return pokemonBreeding.searchedPokemonBre;
+    }  
+}
+
+
+function checkIfEggGroupExists(breeding, i) {
+    if (breeding[i].egg_groups.length == 0) {
+        return '-';
+    } else {
+        return capitalizeFirstLetter(breeding[i].egg_groups[0].name);
+    }
+}
+
+// This function checks if the second egg_group is available, if not returns -
+
+function checkIfthere(breeding, i) {
+    if (breeding[i].egg_groups[1]) {
+        return capitalizeFirstLetter(breeding[i].egg_groups[1].name);
+    } else {
+        return '-';
+    }
+}
+
+
+function checkForSpecies() {
+    pokemonBreeding.searchedPokemonBre = [];
+    for (let i = 0; i < pokemon.searchedPokemon.length; i++) {
+        const name = pokemon.searchedPokemon[i].species.name;
+        if (pokemon.searchedPokemon[i].name.includes(name)) {
+            loadBreeding('searchedPokemonBre', name);
+        } else {
+            loadBreeding('searchedPokemonBre', pokemon.searchedPokemon[i].name)
+        }
+    }
+}
+
+function checkIfBaseExperienceExists(pJ, i) {
+    if (pJ[i].base_experience) {
+        return pJ[i].base_experience;
+    } else {
+        return '-';
+    }
 }
 
 // This function checks if the card is already in myCard to return the source of image
 
 function checkCardStatus(name) {
-    if (Array.isArray(myCards)) {
-        for (let i = 0; i < myCards.length; i++) {
-            const cardName = myCards[i].name;
+    if (Array.isArray(pokemon.myCards)) {
+        for (let i = 0; i < pokemon.myCards.length; i++) {
+            const cardName = pokemon.myCards[i].name;
             if (cardName === name) {
                 return 'src/img/heart-full.png';
             } 
@@ -149,16 +201,6 @@ function blurBackground() {
     main.classList.toggle('blur');
 }
 
-// This function checks if the second egg_group is available, if not returns -
-
-function checkIfthere(i) {
-    if (breeding[i].egg_groups[1]) {
-        return capitalizeFirstLetter(breeding[i].egg_groups[1].name);
-    } else {
-        return '-';
-    }
-}
-
 // This two functions are from moving the back and forwards between cards
 
 function nextCard(i, pJ) {
@@ -192,6 +234,10 @@ function nextCardCheck(i, pJ) {
 // This function checks if there is a card before or after the displayed full card, to jump to the next/last if deleted out of myCards array
 
 function checkIndexOfJson(i, pJ) {
+    if (pJ.length == 0) {
+        closeCard();
+        return;
+    }
     if(i == 0) {
         return nextCard(i-1, pJ);
     }
@@ -214,10 +260,10 @@ function resetSearch() {
 function resetAllJsonAndVariables() {
     start = 1;
     endOf = 24;
-    allPokemon = [];
-    pokemonNames = [];
-    allTypes = [];
-    breeding = [];
+    pokemon.searchedPokemon = [];
+    pokemonBreeding.searchedPokemonBre = [];
+    pokemon.displayedPokemon = [];
+    pokemonBreeding.displayedPokemonBre = [];
     renderTypeIndex = 0;
     renderPokemonIndex = 0;
 }
@@ -228,18 +274,20 @@ function switchContainer() {
     let mainContainer = document.getElementById('cardContainer');
     let myCardContainer = document.getElementById('myCardsContainer');
     let myCardBtn = document.getElementById('favoritesBtn');
+    let moreCardsBtn = document.getElementById('moreBtn');
     mainContainer.classList.toggle('dNone');
     myCardContainer.classList.toggle('dNone');
     myCardBtn.classList.toggle('glowBtn');
+    moreCardsBtn.classList.toggle('dNone');
 }
 
 
 // This function checks if a certain card is already in the array of myCards
 
 function checkIfCardIsInMyCards(name) {
-    if (Array.isArray(myCards)) {
-        for (let i = 0; i < myCards.length; i++) {
-            const cardName = myCards[i].name;
+    if (Array.isArray(pokemon.myCards)) {
+        for (let i = 0; i < pokemon.myCards.length; i++) {
+            const cardName = pokemon.myCards[i].name;
             if (cardName == name) {
                 return i;
             }
@@ -251,14 +299,18 @@ function checkIfCardIsInMyCards(name) {
 // This two function save and load the myCards Array in the/from the local storage
 
 function saveCards() {
-    let cardsAsText = JSON.stringify(myCards);
+    let cardsAsText = JSON.stringify(pokemon.myCards);
+    let breedingAsText = JSON.stringify(pokemonBreeding.myCardsBre);
     localStorage.setItem('cards', cardsAsText);
+    localStorage.setItem('breed', breedingAsText);
 }
 
 
 function loadCards() {
     let cardsAsText = localStorage.getItem('cards');
-    if (cardsAsText) {
-        myCards = JSON.parse(cardsAsText);
+    let breedingAsText = localStorage.getItem('breed');
+    if (cardsAsText && breedingAsText) {
+        pokemon.myCards = JSON.parse(cardsAsText);
+        pokemonBreeding.myCardsBre = JSON.parse(breedingAsText);
     }
 }
