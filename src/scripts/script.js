@@ -192,7 +192,7 @@ function renderMoves(i, pJ) {
 
 async function searchPokemon() {
     resetAllJsonAndVariables();
-    if (document.getElementById('inputSearch').value == 0) return;
+    if (document.querySelector('.inputSearch').value == 0 && document.querySelector('.inputMobileSearch').value == 0) return;
     document.getElementById('moreBtn').classList.add('dNone')
     showLoader();
     document.getElementById('cardContainer').innerHTML = '';
@@ -208,7 +208,7 @@ async function searchPokemon() {
 
 async function searchForPokemonInPokemonNames() {
     let searchedPokemon = [];
-    let search = document.getElementById('inputSearch');
+    let search = checkInputFieldValue();
     searchValue = search.value.toLowerCase();
     for (let i = 0; i < pokemonNames.length; i++) {
         const currentPokemon = pokemonNames[i];
@@ -223,7 +223,15 @@ async function searchForPokemonInPokemonNames() {
     search.value = '';
 }
 
-
+function checkInputFieldValue() {
+    let inputDesktop = document.querySelector('.inputSearch');
+    let inputMobile = document.querySelector('.inputMobileSearch');
+    if (inputDesktop.value == 0) {
+        return inputMobile;
+    } else {
+        return inputDesktop;
+    }
+}
 
 function renderSearchedPokemon() {
     for (let i = 0; i < pokemon.searchedPokemon.length; i++) {

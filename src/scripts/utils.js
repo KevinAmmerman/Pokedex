@@ -178,6 +178,20 @@ function closeCard() {
     blurBackground();
 }
 
+// This function animates when open a single card
+
+function animatenOpenSingleCard() {
+    const box = document.querySelector('.animation');
+    box.animate([
+        { opacity: 0, transform: 'scale(0.5)' },
+        { opacity: 1, transform: 'scale(1)' }
+    ], {
+        duration: 700,
+        easing: 'ease',
+        fill: 'forwards'
+    });
+}
+
 // Function to prefent action for parrent elements
 
 function doNotClose(event) {
@@ -264,11 +278,21 @@ function switchContainer() {
     let mainContainer = document.getElementById('cardContainer');
     let myCardContainer = document.getElementById('myCardsContainer');
     let myCardBtn = document.getElementById('favoritesBtn');
-    let moreCardsBtn = document.getElementById('moreBtn');
     mainContainer.classList.toggle('dNone');
     myCardContainer.classList.toggle('dNone');
     myCardBtn.classList.toggle('glowBtn');
-    moreCardsBtn.classList.toggle('dNone');
+}
+
+// This function adds the class dNone
+
+function checkClass() {
+    let card = document.getElementById('moreBtn');
+    if (pokemon.searchedPokemon.length > 0) {
+        card.classList.add('dNone');
+    } else {
+        let moreCardsBtn = document.getElementById('moreBtn');
+        moreCardsBtn.classList.toggle('dNone');
+    }
 }
 
 

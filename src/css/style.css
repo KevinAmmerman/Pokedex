@@ -69,6 +69,11 @@ body {
     cursor: pointer;
 }
 
+.active {
+    border-bottom: 2px solid white;
+    padding-bottom: 9px;
+}
+
 /* === LOADING-SCREEN === */
 
 #loadingContainer {
@@ -101,7 +106,10 @@ body {
 /* === HEADER === */
 
 header {
+    position: fixed;
+    z-index: 10;
     height: 120px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -119,6 +127,27 @@ header>a>img {
 
 .searchContainer {
     padding-right: 24px;
+    transform: translateX(0);
+}
+
+.mobileNav {
+    height: 40px;
+    cursor: pointer;
+    padding-right: 24px;
+    display: none !important;
+    
+}
+
+.mobileNavContainer {
+    position: fixed;
+    top: 120px;
+    z-index: 10;
+    background: linear-gradient(to bottom, #1A1B1F, #202124);
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* === POKEMON CARD SMALL === */
@@ -132,8 +161,17 @@ main {
 #cardContainer {
     display: flex;
     flex-wrap: wrap;
-    width: 80%;
+    width: 90%;
     justify-content: center;
+    margin-top: 170px;
+}
+
+.moreBtn {
+    width: 60px;
+    text-align: center;
+    margin-bottom: 24px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cardSmall {
@@ -223,7 +261,7 @@ main {
     position: fixed;
     left: 0;
     right: 0;
-    top: 0;
+    top: 120px;
     bottom: 0;
     display: flex;
     justify-content: center;
@@ -236,6 +274,12 @@ main {
     height: 670px;
     position: relative;
     overflow: hidden;
+}
+
+.animation {
+    position: relative;
+    opacity: 0;
+    transform: scale(0.5);
 }
 
 .topPart {
@@ -380,11 +424,6 @@ main {
     cursor: pointer;
 }
 
-.active {
-    border-bottom: 2px solid white;
-    padding-bottom: 9px;
-}
-
 /* === INFO-SECTION === */
 
 #infoPokemon {
@@ -483,10 +522,54 @@ main {
 #myCardsContainer {
     display: flex;
     flex-wrap: wrap;
-    width: 80%;
+    width: 90%;
     justify-content: center;
+    margin-top: 170px;
 }
 
 .favoritesBtn:hover {
     transform: scale(1.1);
+}
+
+
+/* === MEDIA-QUERIES === */
+
+@media (max-width: 668px) {
+
+    .mobileNav {
+        display: block !important;
+        padding-right: 24px;
+    }
+
+    .searchContainer {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+
+    header {
+        height: 70px;
+    }
+
+    header>a>img {
+        height: 50px;
+        padding-left: 24px;
+    }
+
+    .mobileNavContainer {
+        top: 70px;
+    }
+
+    #myCardsContainer {
+        margin-top: 120px;
+    }
+
+    #cardContainer {
+        margin-top: 120px;
+    }
+
+    .fullCardContainer {
+        top: 70px;
+    }
 }

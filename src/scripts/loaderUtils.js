@@ -1,44 +1,25 @@
 function showLoader() {
-    const loader = document.getElementById("loadingContainer");
-    loader.style.display = "flex";
+    let loader = document.getElementById('loadingContainer');
+    loader.style.display = 'flex';
 }
 
 
 function hideLoader() {
-    const loader = document.getElementById("loadingContainer");
-    loader.style.display = "none";
+    let loader = document.getElementById('loadingContainer');
+    loader.style.display = 'none';
 }
 
 
-// window.addEventListener('scroll', function () {
-//     const current = window.innerHeight + this.window.scrollY;
-//     const maxHeight = document.body.scrollHeight;
-//     console.log('check current', current);
-//     console.log('check max', maxHeight);
-//     if (current -24 == maxHeight) {
-//         moreCards();
-//       }
-// });
+function toggleMobileNav() {
+    let searchContainer = document.getElementById('mobileNavContainer');
+    searchContainer.classList.toggle('dNone');
+  }
 
-// function scrollHandler() {
-//     const current = window.innerHeight + window.scrollY;
-//     const maxHeight = document.body.scrollHeight;
-//     console.log('check current', current);
-//     console.log('check max', maxHeight);
-//     if (current -24 == maxHeight) {
-//         moreCards();
-//     }
-// }
 
-// let cardContainer = document.getElementById('cardContainer');
-// console.log('cardContainer:', cardContainer);
-
-// document.getElementById('cardContainer').addEventListener('scroll', function () {
-//     const current = cardContainer.scrollTop + cardContainer.clientHeight;
-//     const maxHeight = cardContainer.scrollHeight;
-//     console.log('check current', current);
-//     console.log('check max', maxHeight);
-//     if (current === maxHeight) {
-//         console.log('Ende des Scrollens erreicht.');
-//     }
-// });
+  window.addEventListener('resize', function() {
+    let searchContainer = document.getElementById('mobileNavContainer');
+    let windowWidth = window.innerWidth;
+    if (windowWidth > 668) {
+        searchContainer.classList.add('dNone');
+    }
+  });

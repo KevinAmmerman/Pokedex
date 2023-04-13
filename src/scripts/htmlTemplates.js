@@ -6,7 +6,7 @@ function createHtmlForPokemonSmallCard(currentPokemon, i, myCardType, cardIndex)
     let TypeContainer = checkIdforTypeContainer(myCardType, i);
     let openFullCard = checkIndexforFullCard(myCardType, i)
     return `
-        <div onclick="${openFullCard}" class="cardSmall" style="background-color: ${actualColor}">
+        <div onclick="${openFullCard}, animatenOpenSingleCard()" class="cardSmall" style="background-color: ${actualColor}">
             <h1 class="cardName">${pokemonName}</h1>
             <div id="${TypeContainer}" class="typeContainer"></div>
             <div class="cardOrder">${pokemonNumber}</div>

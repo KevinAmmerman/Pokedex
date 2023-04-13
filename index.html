@@ -21,8 +21,14 @@
     <header>
         <a href="index.html"><img src="src/img/pokemon-logo.png" alt=""></a>
         <div onclick="openMyCards()" class="btnStyle" id="favoritesBtn" title="Open/Close">My cards</div>
-        <div class="searchContainer">
-            <input placeholder="Search for Pokemon" type="text" id="inputSearch">
+        <img onclick="toggleMobileNav()" src="src/img/menu.png" alt="" id="mobileNav" class="mobileNav">
+        <div class="searchContainer" id="searchContainer">
+            <input placeholder="Search for Pokemon" type="text" id="inputSearch" class="inputSearch">
+            <button onclick="searchPokemon()">Go</button>
+            <button onclick="resetSearch()">Reset</button>
+        </div>
+        <div class="mobileNavContainer dNone" id="mobileNavContainer">
+            <input placeholder="Search for Pokemon" type="text" id="inputSearch" class="inputMobileSearch">
             <button onclick="searchPokemon()">Go</button>
             <button onclick="resetSearch()">Reset</button>
         </div>
@@ -31,75 +37,11 @@
         <div id="cardContainer"></div>
         <div id="myCardsContainer" class="dNone"></div>
     </main>
-    <div onclick="moreCards()" id="moreBtn" class="moreBtn btnStyle" style="cursor: pointer;">More</div>
+    <div onclick="moreCards()" id="moreBtn" class="moreBtn btnStyle dNone">More</div>
     <section id="fullCardContainer" class="fullCardContainer" onclick="closeCard()" style="display: none;">
-        <div class="card" id="card" onclick="doNotClose(event)">
-            <div class="topPart" style="background-color: #59A952;">
-                <img class="likeBtn" src="src/img/heart-empty.png" alt="">
-                <img class="closeBtn" src="src/img/close.png" alt="">
-                <h1 class="fullCardName">Bulbasaur</h1>
-                <div id="fullCardTypContainer">
-                    <div class="type typeFullCard">Grass</div>
-                    <div class="type typeFullCard">Poison</div>
-                </div>
-                <div class="fullCardOrder">#001</div>
-            </div>
-            <img class="fullCardImage" src="src/img/pngwing.com.png"></img>
-            <img class="fullCardPokeballImage" src="src/img/Unbenannt.png" alt="">
-            <div class="bottomPart">
-                <div class="statsNav">
-                    <div class="stats">About</div>
-                    <div class="stats">Base Stats</div>
-                    <div class="stats">Evolution</div>
-                    <div class="stats">Moves</div>
-                </div>
-                <div class="border"></div>
-                <div id="infoPokemon">
-                    <div class="progressBarContainer">
-                        <div class="statsBarRow">
-                            <div class="statName">HP</div>
-                            <div class="progress">
-                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
-                            </div>
-                        </div>
-                        <div class="statsBarRow">
-                            <div class="statName">Attack</div>
-                            <div class="progress">
-                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
-                            </div>
-                        </div>
-                        <div class="statsBarRow">
-                            <div class="statName">Defense</div>
-                            <div class="progress">
-                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
-                            </div>
-                        </div>
-                        <div class="statsBarRow">
-                            <div class="statName">Special-Attack</div>
-                            <div class="progress">
-                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
-                            </div>
-                        </div>
-                        <div class="statsBarRow">
-                            <div class="statName">Special-Defense</div>
-                            <div class="progress">
-                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
-                            </div>
-                        </div>
-                        <div class="statsBarRow">
-                            <div class="statName">Speed</div>
-                            <div class="progress">
-                                <div class="progressBar" style="width: 80%; background-color: #59A952;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="card animation" id="card" onclick="doNotClose(event)"></div>
     </section>
-
     <div id="loadingContainer" style="display: none;"><img class="loadingImage" src="src/img/pokeball.png" alt=""></div>
-
 </body>
 
 </html>
