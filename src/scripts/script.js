@@ -1,5 +1,3 @@
-let start = 1;
-let endOf = 24;
 let pokemonNames = [];
 let pokemon = {
     displayedPokemon: [],
@@ -13,6 +11,8 @@ let pokemonBreeding = {
 };
 let renderTypeIndex = 0;
 let renderPokemonIndex = 0;
+let start = 1;
+let endOf = 24;
 
 
 // This is the inital function what starts other functions
@@ -23,11 +23,12 @@ async function init() {
     showLoader();
     await loadPokemon();
     await loadPokemonNames();
-    loadBreeding('displayedPokemonBre', pokemon.displayedPokemon);
+    await loadBreeding('displayedPokemonBre', pokemon.displayedPokemon);
     blurBackground();
     hideLoader();
     renderPokemon();
     renderTypes();
+    document.getElementById('moreBtn').classList.remove('dNone');
 }
 
 // === GET-API-FUNCTIONS ===
@@ -42,7 +43,7 @@ async function loadPokemon() {
     }
 }
 
-
+// This function gets the data of the pokemons searched
 
 async function loadSearchedPokemon(i, j) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
@@ -51,7 +52,7 @@ async function loadSearchedPokemon(i, j) {
     pokemon.searchedPokemon.push(currentPokemon);
 }
 
-
+//  This function gets the names of all pokemon, for the search functionality 
 
 async function loadPokemonNames() {
     let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1280'
@@ -63,7 +64,7 @@ async function loadPokemonNames() {
     }
 }
 
-
+// This functions loads the breeding for the pokemon
 
 async function loadBreeding(pjb, pJ) {
     for (let i = 0; i < pJ.length; i++) {
@@ -78,6 +79,8 @@ async function loadBreeding(pjb, pJ) {
 
 // === SMALL-CARD-FUNCTIONS ===
 
+
+// This functions renders the pokemon and updates the index for already loaded pokemon
 
 function renderPokemon() {
     for (let i = renderPokemonIndex; i < pokemon.displayedPokemon.length; i++) {
@@ -115,7 +118,7 @@ function openFullCard(i, pokemonJson) {
     blurBackground();
 }
 
-
+// This function renders the types of the pokemon for the single card
 
 function renderTypesForFullCard(i, pJ) {
     let styleClass = 'typeFullCard';
@@ -190,6 +193,7 @@ function renderMoves(i, pJ) {
 async function searchPokemon() {
     resetAllJsonAndVariables();
     if (document.getElementById('inputSearch').value == 0) return;
+    document.getElementById('moreBtn').classList.add('dNone')
     showLoader();
     document.getElementById('cardContainer').innerHTML = '';
     pokemon.searchedPokemon = [];
@@ -243,6 +247,7 @@ function renderTypesSearch() {
 // === MY-CARDS-SECTION ===
 
 function openMyCards() {
+    checkClass();
     renderMyCards();
     switchContainer();
 }
