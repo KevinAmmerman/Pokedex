@@ -211,6 +211,10 @@ function renderMoves(i, pJ) {
 
 // === SEARCH-FUNCTIONS ===
 
+
+/**
+ * starts the search for pokemon
+ */
 async function searchPokemon() {
     resetAllJsonAndVariables();
     if (document.getElementById('inputSearch').value == 0 && document.getElementById('inputMobileSearch').value == 0) return;
@@ -226,7 +230,10 @@ async function searchPokemon() {
 }
 
 
-
+/**
+ * Takes the input value and checks for matches with the names of the pokemonName Array, 
+ * pushes the matches in searchedPokemon and starts the loadSearchedPokemon Function to get them from the api.
+ */
 async function searchForPokemonInPokemonNames() {
     let searchedPokemon = [];
     let search = checkInputFieldValue();
@@ -245,6 +252,9 @@ async function searchForPokemonInPokemonNames() {
 }
 
 
+/**
+ * Checks which of the input field has a value and returns the right on
+ */
 function checkInputFieldValue() {
     let inputDesktop = document.getElementById('inputSearch');
     let inputMobile = document.getElementById('inputMobileSearch');
@@ -256,6 +266,9 @@ function checkInputFieldValue() {
 }
 
 
+/**
+ * Renders the searchedPokemon
+ */
 function renderSearchedPokemon() {
     for (let i = 0; i < pokemon.searchedPokemon.length; i++) {
         const currentPokemon = pokemon.searchedPokemon[i];
@@ -264,6 +277,9 @@ function renderSearchedPokemon() {
 }
 
 
+/**
+ * Renders types of the searchedPokemon
+ */
 function renderTypesSearch() {
     for (let i = 0; i < pokemon.searchedPokemon.length; i++) {
         const currentPokemon = pokemon.searchedPokemon[i];
@@ -284,6 +300,10 @@ function openMyCards() {
 }
 
 
+/**
+ * Checks if pokemon is already in my card and adds or deletes it to/from array
+ * and changes the heart image
+ */
 function addOrDeleteMyCards(i, pJ) {
     let card = checkIfCardIsInMyCards(pJ[i].name);
     if (card != -1) {
@@ -304,7 +324,9 @@ function addOrDeleteMyCards(i, pJ) {
 }
 
 
-
+/**
+ * Renders the pokemon what are in myCards
+ */
 function renderMyCards() {
     let myCardContainer = document.getElementById('myCardsContainer');
     myCardContainer.innerHTML = '';
@@ -316,6 +338,9 @@ function renderMyCards() {
 }
 
 
+/**
+ * Renders Types of pokemon of myCards
+ */
 function renderTypesMyCards(currentPokemon, j) {
     for (let i = 0; i < currentPokemon.types.length; i++) {
         const type = currentPokemon.types[i].type.name;
