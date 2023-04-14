@@ -1,5 +1,6 @@
-// This function gives based on the type of Pokemon an color code back for the background
-
+/**
+ * Gives based on the type of Pokemon an color code back for the background
+*/
 function setPokemonListCardsBgr(element) {
     return (
         {
@@ -25,9 +26,9 @@ function setPokemonListCardsBgr(element) {
     );
 }
 
-
-// This function takes a Pokemon object as input and returns a formatted ID string.
-
+/**
+ * Takes a Pokemon object as input and returns a formatted ID string.
+ */
 function formatNumber(number) {
     let num = number;
     if (num < 10) {
@@ -39,26 +40,25 @@ function formatNumber(number) {
     }
 }
 
-
-// This function takes an string as input and returns it with the first letter capitalized.
-
+/**
+ * Takes an string as input and returns it with the first letter capitalized.
+ */
 function capitalizeFirstLetter(lu) {
     let upCase = lu;
     return upCase.charAt(0).toUpperCase() + upCase.slice(1);
 }
-
-
-// This function that removes the last two characters from the text
-
+/**
+ * Removes the last two characters from the text
+ */
 function sliceKomma() {
     let abilities = document.getElementById('abilities');
     let text = abilities.textContent || abilities.innerText;
     text = text.slice(0, text.length - 2);
     abilities.innerHTML = text;
 }
-
-// This function that adds the "active" CSS class to an HTML element with the given id, while removing the "active" class from any other element that has the same class. The function is intended to be used to toggle the "active" state of multiple elements.
-
+/**
+ * Adds the "active" CSS class to an HTML element with the given id, while removing the "active" class from any other element that has the same class. The function is intended to be used to toggle the "active" state of multiple elements.
+ */
 function addActiveClass(id) {
     const elements = document.querySelectorAll('.active');
     elements.forEach((element) => {
@@ -67,9 +67,9 @@ function addActiveClass(id) {
     let active = document.getElementById(id);
     active.classList.add('active');
 }
-
-// This function checks what json array is needed and returns it
-
+/**
+ * Checks what json array is needed and returns it
+ */
 function checkIndexforFullCard(myCard, i) {
     if (myCard == 'myCardTypeContainer') {
         return `openFullCard(${i}, pokemon.myCards)`;
@@ -79,9 +79,9 @@ function checkIndexforFullCard(myCard, i) {
         return `openFullCard(${i}, pokemon.displayedPokemon)`;
     }
 }
-
-// This function checks what id is needed for the container and returns it
-
+/**
+ * Checks what id is needed for the container and returns it
+ */
 function checkIdforTypeContainer(myCard, i) {
     if (myCard == 'myCardTypeContainer') {
         return `myCardTypeContainer${i}`;
@@ -91,9 +91,9 @@ function checkIdforTypeContainer(myCard, i) {
         return `typeContainer${i}`;
     }
 }
-
-// This function checks what json array it need to use, to switch between cards
-
+/**
+ * Checks what json array it need to use, to switch between cards
+ */
 function checkJsonForSwitchCard(pJ) {
     if (pJ.length == pokemon.displayedPokemon.length) {
         return 'pokemon.displayedPokemon';
@@ -101,7 +101,7 @@ function checkJsonForSwitchCard(pJ) {
         return 'pokemon.myCards';
     } else {
         return 'pokemon.searchedPokemon';
-    }    
+    }
 }
 
 
@@ -113,7 +113,7 @@ function checkBreedingJson(pJ) {
         return pokemonBreeding.myCardsBre;
     } else {
         return pokemonBreeding.searchedPokemonBre;
-    }  
+    }
 }
 
 
@@ -125,8 +125,10 @@ function checkIfEggGroupExists(breeding, i) {
     }
 }
 
-// This function checks if the second egg_group is available, if not returns -
 
+/**
+ * Checks if the second egg_group is available, if not returns '-'
+ */
 function checkIfthere(breeding, i) {
     if (breeding[i].egg_groups[1]) {
         return capitalizeFirstLetter(breeding[i].egg_groups[1].name);
@@ -145,7 +147,11 @@ function checkIfBaseExperienceExists(pJ, i) {
     }
 }
 
-// This function checks if the card is already in myCard to return the source of image
+
+/**
+ * Checks if the card is already in myCard to return the source of image
+ */
+
 
 function checkCardStatus(name) {
     if (Array.isArray(pokemon.myCards)) {
@@ -153,14 +159,16 @@ function checkCardStatus(name) {
             const cardName = pokemon.myCards[i].name;
             if (cardName === name) {
                 return 'src/img/heart-full.png';
-            } 
+            }
         }
         return 'src/img/heart-empty.png';
-    } 
+    }
 }
 
-// This function changes the variables for the amount of loaded pokemon cards
 
+/**
+ * Changes the variables for the amount of loaded pokemon cards
+ */
 function moreCards() {
     start = start + 24;
     endOf = endOf + 24;
@@ -168,8 +176,10 @@ function moreCards() {
     init();
 }
 
-// This function to close the full card 
 
+/**
+ * Closes the full card
+ */
 function closeCard() {
     document.getElementById('fullCardContainer').style.display = 'none';
     let card = document.getElementById('card');
@@ -178,8 +188,10 @@ function closeCard() {
     blurBackground();
 }
 
-// This function animates when open a single card
 
+/**
+ * Animates when open a single card
+ */
 function animatenOpenSingleCard() {
     const box = document.querySelector('.animation');
     box.animate([
@@ -192,21 +204,28 @@ function animatenOpenSingleCard() {
     });
 }
 
-// Function to prefent action for parrent elements
 
+/**
+ * Prefent action for parrent elements
+ */
 function doNotClose(event) {
     event.stopPropagation();
 }
 
-// Function to blur the background
+
+/**
+ * Blur the background
+ */
 
 function blurBackground() {
     let main = document.getElementById('mainSection');
     main.classList.toggle('blur');
 }
 
-// This two functions are from moving the back and forwards between cards
 
+/**
+ * Moving back and forward between cards
+ */
 function nextCard(i, pJ) {
     openFullCard(i + 1, pJ)
 }
@@ -216,8 +235,10 @@ function previousCard(i, pJ) {
     openFullCard(i - 1, pJ)
 }
 
-//  This two function check if there is a card before and after the current open full card and displayes or not the arrow
 
+/**
+ * Check if there is a card before and after the current open full card and displayes or not the arrow
+ */
 function previousCardCheck(i) {
     if (i === 0) {
         return 'display: none';
@@ -235,23 +256,27 @@ function nextCardCheck(i, pJ) {
     }
 }
 
-// This function checks if there is a card before or after the displayed full card, to jump to the next/last if deleted out of myCards array
 
+/**
+ * Checks if there is a card before or after the displayed full card, to jump to the next/last if deleted out of myCards array
+ */
 function checkIndexOfJson(i, pJ) {
     if (pJ.length == 0) {
         closeCard();
         return;
     }
-    if(i == 0) {
-        return nextCard(i-1, pJ);
+    if (i == 0) {
+        return nextCard(i - 1, pJ);
     }
-    if(i <= pJ.length) {
+    if (i <= pJ.length) {
         return previousCard(i, pJ);
     }
 }
 
-// This function resets the search field and starts the i
 
+/**
+ * Resets the search field and starts the i
+*/
 function resetSearch() {
     resetAllJsonAndVariables();
     document.getElementById('cardContainer').innerHTML = '';
@@ -259,8 +284,27 @@ function resetSearch() {
     init();
 }
 
-// This function resets variables and arrays to default
 
+
+function toggleMobileNav() {
+    let searchContainer = document.getElementById('mobileNavContainer');
+    searchContainer.classList.toggle('dNone');
+}
+
+
+
+window.addEventListener('resize', function () {
+    let searchContainer = document.getElementById('mobileNavContainer');
+    let windowWidth = window.innerWidth;
+    if (windowWidth > 668) {
+        searchContainer.classList.add('dNone');
+    }
+});
+
+
+/** 
+ * Resets variables and arrays to default
+ * */ 
 function resetAllJsonAndVariables() {
     start = 1;
     endOf = 24;
@@ -272,8 +316,10 @@ function resetAllJsonAndVariables() {
     renderPokemonIndex = 0;
 }
 
-// This function toggles classes to open myCards and add a glow to the button
 
+/**
+ * Toggles classes to open myCards and add a glow to the button
+ */
 function switchContainer() {
     let mainContainer = document.getElementById('cardContainer');
     let myCardContainer = document.getElementById('myCardsContainer');
@@ -283,8 +329,10 @@ function switchContainer() {
     myCardBtn.classList.toggle('glowBtn');
 }
 
-// This function adds the class dNone
 
+/**
+ * Adds the class dNone
+ */
 function checkClass() {
     let card = document.getElementById('moreBtn');
     if (pokemon.searchedPokemon.length > 0) {
@@ -296,8 +344,9 @@ function checkClass() {
 }
 
 
-// This function checks if a certain card is already in the array of myCards
-
+/**
+ * Checks if a certain card is already in the array of myCards
+ */
 function checkIfCardIsInMyCards(name) {
     if (Array.isArray(pokemon.myCards)) {
         for (let i = 0; i < pokemon.myCards.length; i++) {
@@ -306,12 +355,14 @@ function checkIfCardIsInMyCards(name) {
                 return i;
             }
         }
-        return -1; 
+        return -1;
     }
 }
 
-// This two function save and load the myCards Array in the/from the local storage
 
+/**
+ * Save and load the myCards Array in the/from the local storage
+ */
 function saveCards() {
     let cardsAsText = JSON.stringify(pokemon.myCards);
     let breedingAsText = JSON.stringify(pokemonBreeding.myCardsBre);

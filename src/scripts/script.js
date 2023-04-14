@@ -15,8 +15,9 @@ let start = 1;
 let endOf = 24;
 
 
-// This is the inital function what starts other functions
-
+/**
+ * Inital function what starts other functions
+ */
 async function init() {
     loadCards();
     blurBackground();
@@ -39,12 +40,13 @@ async function loadPokemon() {
         let response = await fetch(url);
         let currentPokemon = await response.json();
         pokemon.displayedPokemon.push(currentPokemon);
-        // loadBreeding('displayedPokemonBre', i);
     }
 }
 
-// This function gets the data of the pokemons searched
 
+/**
+ * Get data of the pokemons searched for
+ */
 async function loadSearchedPokemon(i, j) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
@@ -52,8 +54,10 @@ async function loadSearchedPokemon(i, j) {
     pokemon.searchedPokemon.push(currentPokemon);
 }
 
-//  This function gets the names of all pokemon, for the search functionality 
 
+/**
+ * Gets the names of all pokemon, for the search functionality 
+ */
 async function loadPokemonNames() {
     let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1280'
     let response = await fetch(url);
@@ -64,8 +68,10 @@ async function loadPokemonNames() {
     }
 }
 
-// This functions loads the breeding for the pokemon
 
+/**
+ * Loads the breeding for the pokemon
+ */
 async function loadBreeding(pjb, pJ) {
     for (let i = 0; i < pJ.length; i++) {
         const speciesUrl = pJ[i].species.url;
@@ -77,11 +83,13 @@ async function loadBreeding(pjb, pJ) {
     saveCards();
 }
 
+
 // === SMALL-CARD-FUNCTIONS ===
 
 
-// This functions renders the pokemon and updates the index for already loaded pokemon
-
+/**
+ * Renders the pokemon and updates the index for already loaded pokemon
+ */
 function renderPokemon() {
     for (let i = renderPokemonIndex; i < pokemon.displayedPokemon.length; i++) {
         const currentPokemon = pokemon.displayedPokemon[i];
@@ -90,8 +98,10 @@ function renderPokemon() {
     }
 }
 
-// This function iterates through an JSON array to gets every single type
 
+/**
+ * Iterates through an JSON array to gets every single type
+ */
 function renderTypes() {
     for (let i = renderTypeIndex; i < pokemon.displayedPokemon.length; i++) {
         const types = pokemon.displayedPokemon[i].types;
@@ -102,6 +112,8 @@ function renderTypes() {
         renderTypeIndex = i + 1;
     }
 }
+
+
 
 // === SINGLE-CARD-FUNCTIONS ===
 
@@ -118,8 +130,10 @@ function openFullCard(i, pokemonJson) {
     blurBackground();
 }
 
-// This function renders the types of the pokemon for the single card
 
+/**
+ * Renders the types of the pokemon for the single card
+ */
 function renderTypesForFullCard(i, pJ) {
     let styleClass = 'typeFullCard';
     for (let t = 0; t < pJ[i].types.length; t++) {
@@ -192,7 +206,7 @@ function renderMoves(i, pJ) {
 
 async function searchPokemon() {
     resetAllJsonAndVariables();
-    if (document.querySelector('.inputSearch').value == 0 && document.querySelector('.inputMobileSearch').value == 0) return;
+    if (document.getElementById('inputSearch').value == 0 && document.getElementById('inputMobileSearch').value == 0) return;
     document.getElementById('moreBtn').classList.add('dNone')
     showLoader();
     document.getElementById('cardContainer').innerHTML = '';
@@ -223,15 +237,17 @@ async function searchForPokemonInPokemonNames() {
     search.value = '';
 }
 
+
 function checkInputFieldValue() {
-    let inputDesktop = document.querySelector('.inputSearch');
-    let inputMobile = document.querySelector('.inputMobileSearch');
+    let inputDesktop = document.getElementById('inputSearch');
+    let inputMobile = document.getElementById('inputMobileSearch');
     if (inputDesktop.value == 0) {
         return inputMobile;
     } else {
         return inputDesktop;
     }
 }
+
 
 function renderSearchedPokemon() {
     for (let i = 0; i < pokemon.searchedPokemon.length; i++) {
