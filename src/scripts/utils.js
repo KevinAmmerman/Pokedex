@@ -40,6 +40,7 @@ function formatNumber(number) {
     }
 }
 
+
 /**
  * Takes an string as input and returns it with the first letter capitalized.
  */
@@ -47,6 +48,8 @@ function capitalizeFirstLetter(lu) {
     let upCase = lu;
     return upCase.charAt(0).toUpperCase() + upCase.slice(1);
 }
+
+
 /**
  * Removes the last two characters from the text
  */
@@ -56,6 +59,8 @@ function sliceKomma() {
     text = text.slice(0, text.length - 2);
     abilities.innerHTML = text;
 }
+
+
 /**
  * Adds the "active" CSS class to an HTML element with the given id, while removing the "active" class from any other element that has the same class. The function is intended to be used to toggle the "active" state of multiple elements.
  */
@@ -67,6 +72,8 @@ function addActiveClass(id) {
     let active = document.getElementById(id);
     active.classList.add('active');
 }
+
+
 /**
  * Checks what json array is needed and returns it
  */
@@ -79,6 +86,8 @@ function checkIndexforFullCard(myCard, i) {
         return `openFullCard(${i}, pokemon.displayedPokemon)`;
     }
 }
+
+
 /**
  * Checks what id is needed for the container and returns it
  */
@@ -91,6 +100,8 @@ function checkIdforTypeContainer(myCard, i) {
         return `typeContainer${i}`;
     }
 }
+
+
 /**
  * Checks what json array it need to use, to switch between cards
  */
@@ -151,8 +162,6 @@ function checkIfBaseExperienceExists(pJ, i) {
 /**
  * Checks if the card is already in myCard to return the source of image
  */
-
-
 function checkCardStatus(name) {
     if (Array.isArray(pokemon.myCards)) {
         for (let i = 0; i < pokemon.myCards.length; i++) {
