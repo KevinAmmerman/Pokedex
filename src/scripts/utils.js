@@ -202,13 +202,28 @@ function closeCard() {
  * Animates when open a single card
  */
 function animatenOpenSingleCard() {
-    const box = document.querySelector('.animation');
-    box.animate([
+    let card = document.querySelector('.animation');
+    card.animate([
         { opacity: 0, transform: 'scale(0.5)' },
         { opacity: 1, transform: 'scale(1)' }
     ], {
         duration: 700,
         easing: 'ease',
+        fill: 'forwards'
+    });
+}
+
+/**
+ * Animates the bars of stats
+ */
+function animateBars(id, endState) {
+    let bar = document.getElementById(id);
+    bar.animate([
+        { width: 0 },
+        { width: endState }
+    ], {
+        duration: 350,
+        easing: 'ease-in-out',
         fill: 'forwards'
     });
 }

@@ -172,6 +172,13 @@ function openBaseStats(i, pJ) {
     let barContainer = document.getElementById('infoPokemon');
     barContainer.innerHTML = '';
     barContainer.innerHTML = creatHtmlForBaseStats(i, pJ);
+
+    animateBars('barHp', `${pJ[i].stats[0].base_stat / 1.7}%`);
+    animateBars('barAtk', `${pJ[i].stats[1].base_stat / 1.7}%`);
+    animateBars('barDef', `${pJ[i].stats[2].base_stat / 1.7}%`);
+    animateBars('barSpAtk', `${pJ[i].stats[3].base_stat / 1.7}%`);
+    animateBars('barSpDef', `${pJ[i].stats[4].base_stat / 1.7}%`);
+    animateBars('barSpeed', `${pJ[i].stats[5].base_stat / 1.7}%`);
 }
 
 

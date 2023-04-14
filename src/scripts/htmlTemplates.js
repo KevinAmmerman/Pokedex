@@ -129,37 +129,37 @@ function creatHtmlForBaseStats(i, pJ) {
             <div class="statsBarRow">
                 <div class="statName">HP</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${hp / 1.7}%; background-color: #278BCC;">${hp}</div>
+                    <div class="progressBar" id="barHp" style="width: ${hp / 1.7}%; background-color: #278BCC;">${hp}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Attack</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${attack / 1.7}%; background-color: #E53B18;">${attack}</div>
+                    <div class="progressBar" id="barAtk" style="width: ${attack / 1.7}%; background-color: #E53B18;">${attack}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Defense</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${defense / 1.7}%; background-color: #59A952;">${defense}</div>
+                    <div class="progressBar" id="barDef" style="width: ${defense / 1.7}%; background-color: #59A952;">${defense}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Sp. Atk</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${sa / 1.7}%; background-color: #b73016;">${sa}</div>
+                    <div class="progressBar" id="barSpAtk" style="width: ${sa / 1.7}%; background-color: #b73016;">${sa}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Sp. Def</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${sd / 1.7}%; background-color: #387532;">${sd}</div>
+                    <div class="progressBar" id="barSpDef" style="width: ${sd / 1.7}%; background-color: #387532;">${sd}</div>
                 </div>
             </div>
             <div class="statsBarRow">
                 <div class="statName">Speed</div>
                 <div class="progress">
-                    <div class="progressBar" style="width: ${speed / 1.7}%; background-color: #F26200;">${speed}</div>
+                    <div class="progressBar" id="barSpeed" style="width: ${speed / 1.7}%; background-color: #F26200;">${speed}</div>
                 </div>
             </div>
         </div>
